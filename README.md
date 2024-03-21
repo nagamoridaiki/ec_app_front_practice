@@ -1,3 +1,9 @@
+
+# 以下のようなイメージのECサイトを作成
+#### （以下はUI自動生成によって作成したECデザインとChatGPTによって生成したHTMLとCSSのイメージ）
+<img width="1605" alt="スクリーンショット 2024-03-21 22 36 37" src="https://github.com/nagamoridaiki/ec_app_front_practice/assets/44520472/b102245b-c201-4805-86ba-8cfc27d90994">
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -15,21 +15,34 @@ import coffeeTableImage from './products/clothes/blank-1886008_1920.png';
 import armchairImage from './products/clothes/fashion-1283863_1920.jpeg';
 import stoolImage from './products/clothes/man-407095_1920.jpeg';
 import floorLampImage from './products/clothes/shirt-2878932_1920.jpeg';
-import { FaShoppingCart, FaRegNewspaper, FaUserCircle } from 'react-icons/fa';
+import { FaHome, FaShoppingCart, FaRegNewspaper, FaUserCircle } from 'react-icons/fa';
 
+const cartTotal = 2580; // // この値はカートの内容に基づいて動的に変更される予定
 
 function MainPage() {
   return (
     <div className="App">
       <header className="main-header">
-        <div className="search-container">
-          <input type="text" className="search-input" placeholder="Search for furniture, appliances, and more" />
-          <button className="search-btn">Q</button>
+        <div className="logo-container">
+          <a href="/" className="home-link">
+            <FaHome />
+          </a>
         </div>
+        <div className="search-container">
+          <button className="search-btn">Q</button>
+          <input type="text" className="search-input" placeholder="Search for item" />
+        </div>
+
+        <div className="cart-info">
+          <span className="cart-total">¥{cartTotal}</span>
+          <a href="/cart" className="cart-link">
+            <FaShoppingCart />
+          </a>
+        </div>
+
         <nav className="main-nav">
           <ul>
             <li><a href="/news">News</a></li>
-            <li><a href="/cart"><FaShoppingCart /></a></li>
             <li><a href="/mypage">MyPage</a></li>
             <li><a href="/user"><FaUserCircle /></a></li>
           </ul>

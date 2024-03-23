@@ -1,0 +1,52 @@
+.signin-container {
+  background-color: #fff;
+  min-width: 10%; /* Further reduced width for better screen balance */
+  margin: auto;
+  padding: 4%; /* Reduced padding for a smaller form */
+  box-shadow: 0 0.5% 2.5% rgba(0, 0, 0, 0.1);
+  border-radius: 2%; /* Added border-radius for rounded corners */
+}
+
+
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 2%; /* Reduced margin for a tighter layout */
+  width: 50%; /* Shortened width for form-group */
+  border: none; /* Removes the border */
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5%; /* Reduced margin for a tighter layout */
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  width: calc(100% - 10%); /* Further adjusted width for even smaller input fields */
+  padding: 2%; /* Reduced padding for smaller input fields */
+  border: 0.1% solid #ddd;
+  border-radius: 1%; /* Adjust for rounded corners */
+  margin-bottom: 1.5%; /* Reduced margin for a tighter layout */
+}
+
+.signin-button {
+  padding: 2% 3%; /* Reduced padding for a smaller button */
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 1%; /* Match the border-radius of the inputs */
+  cursor: pointer;
+  font-size: 90%; /* Reduced font size for a smaller button */
+  margin-top: 1.5%; /* Reduced margin for a tighter layout */
+}
+
+.signin-button:hover {
+  background-color: #4cae4c;
+}
+

@@ -6,6 +6,9 @@ import MainPage from './MainPage'
 import DetailPage from './DetailPage'
 import CartPage from './CartPage'
 import ProductRegistration from './ProductRegistration'
+import SignIn from './SignIn'
+import Login from './Login'
+import MyPage from './MyPage'
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -14,11 +17,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     {/* <MainPage /> */}
-    <ProductRegistration />
+    <MyPage />
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

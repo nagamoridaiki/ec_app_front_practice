@@ -1,52 +1,82 @@
 
-# 以下のようなイメージのECサイトを作成
-#### （以下はUI自動生成によって作成したECデザインとChatGPTによって生成したHTMLとCSSのイメージ）
-<img width="1605" alt="スクリーンショット 2024-03-21 22 36 37" src="https://github.com/nagamoridaiki/ec_app_front_practice/assets/44520472/b102245b-c201-4805-86ba-8cfc27d90994">
-
-
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```
+yarn run start
+```
+http://localhost:3000/
+でブラウザから確認できる。
 
-## Available Scripts
 
-In the project directory, you can run:
+# 画面イメージ（予定）
 
-### `npm start`
+## 商品一覧（TOP)
+<img width="1644" alt="スクリーンショット 2024-03-23 15 26 32" src="https://github.com/nagamoridaiki/ec_app_front_practice/assets/44520472/ff4e4a7a-98fe-4c18-9a52-f55dc6d2c52e">
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### 機能
+```
+- 出品されている商品の一覧が確認できる
+- 商品をカートに入れる
+- 商品の絞り込み・検索ができる
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 商品詳細
+<img width="1632" alt="スクリーンショット 2024-03-23 15 26 07" src="https://github.com/nagamoridaiki/ec_app_front_practice/assets/44520472/220a4cf6-810e-400b-b9db-2d1ee9d51c72">
 
-### `npm run build`
+#### 機能
+```
+- 選択した商品の詳細が確認できる
+- 商品をカートに入れる
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## カートの中身
+<img width="1632" alt="スクリーンショット 2024-03-23 15 26 07" src="https://github.com/nagamoridaiki/ec_app_front_practice/assets/44520472/22d33e98-befd-44ad-a175-71cc824c5429">
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+#### 機能
+```
+- 商品をカートから外すことができる
+- カートに入れた商品の数量を変更できる
+- カートに入った商品の決済・購入に進むことができる
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 商品出品
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+#### 機能
+```
+- 商品を登録することができる
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## サインイン
+<img width="1609" alt="スクリーンショット 2024-03-23 15 24 42" src="https://github.com/nagamoridaiki/ec_app_front_practice/assets/44520472/988370ce-44ec-4295-b146-f4edf368942a">
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### 機能
+```
+- アカウントを登録できる
+```
+
+
+
+## マイページ
+![スクリーンショット 2024-03-23 15 24 06（2）](https://github.com/nagamoridaiki/ec_app_front_practice/assets/44520472/433d9da0-1ca1-469d-8b1e-af094c3049b7)
+
+#### 機能
+```
+- ログイン中のアカウント情報を確認できる
+- ログイン中のアカウント情報を編集できる
+```
+
+## ログイン
+<img width="1782" alt="スクリーンショット 2024-03-23 15 24 28" src="https://github.com/nagamoridaiki/ec_app_front_practice/assets/44520472/645eb4a6-23ba-4f70-bfef-5baf0be1c779">
+
+#### 機能
+```
+- 登録済みのアカウントでログインできる
+```
+

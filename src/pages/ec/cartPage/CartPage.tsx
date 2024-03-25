@@ -1,43 +1,15 @@
 import React from 'react';
 import './CartPage.css'; // 新しいCSSファイルへのパスを指定
-import './MainPage.css'; // ヘッダーの部分のみ既存のCSSを再利用
-import diningTableImage from './products/books/bible-1867195_1920.jpeg';
-import chairImage from './products/books/book-1283468_1920.jpeg';
-import { FaHome, FaShoppingCart, FaRegNewspaper, FaUserCircle, FaTrash } from 'react-icons/fa';
+import diningTableImage from '../../../products/books/bible-1867195_1920.jpeg';
+import chairImage from '../../../products/books/book-1283468_1920.jpeg';
+import { FaTrash } from 'react-icons/fa';
+import { Header } from '../../../components/organisms/header'
 
-const cartTotal = 2580; // // この値はカートの内容に基づいて動的に変更される予定
 
 function CartPage() {
-  // カートアイテムの状態やロジックをここに実装
-
   return (
     <div className="App">
-      <header className="main-header">
-        <div className="logo-container">
-          <a href="/" className="home-link">
-            <FaHome />
-          </a>
-        </div>
-        <div className="search-container">
-          <button className="search-btn">Q</button>
-          <input type="text" className="search-input" placeholder="Search for item" />
-        </div>
-
-        <div className="cart-info">
-          <span className="cart-total">¥{cartTotal}</span>
-          <a href="/cart" className="cart-link">
-            <FaShoppingCart />
-          </a>
-        </div>
-
-        <nav className="main-nav">
-          <ul>
-            <li><a href="/news">News</a></li>
-            <li><a href="/mypage">MyPage</a></li>
-            <li><a href="/user"><FaUserCircle /></a></li>
-          </ul>
-        </nav>
-      </header>
+      <Header />
 
       <main className="cart">
         <div className="cart-details">

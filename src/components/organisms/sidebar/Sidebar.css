@@ -1,0 +1,56 @@
+
+/*
+ここからサイドバー
+*/
+
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  padding: 20px;
+  margin-right: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.filter-section {
+  margin-bottom: 10px;
+}
+
+.filter-section h3 {
+  margin-bottom: 5px;
+}
+
+/* 価格入力フィールドのスタイル */
+.price-input {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  box-sizing: border-box;
+}
+
+/* 商品名入力フィールドのスタイル */
+.product-name-input {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  box-sizing: border-box;
+}
+
+/* フィルターセクションのラベルのスタイルを微調整 */
+.filters label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.filters input[type='number'] {
+  width: calc(50% - 10px);
+  margin: 5px;
+  padding: 8px;
+}
+
+
+/*
+ここまでサイドバー
+*/
+

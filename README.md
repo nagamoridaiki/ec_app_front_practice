@@ -80,3 +80,13 @@ http://localhost:3000/
 - 登録済みのアカウントでログインできる
 ```
 
+# JSON Serverの立ち上げ方
+別のコンソールタブでts-nextbook-jsonディレクトリに移動して、起動コマンド
+```
+cd ts-nextbook-json
+npm start
+
+```
+http://localhost:8000/
+で立ち上がる。
+

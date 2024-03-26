@@ -1,5 +1,5 @@
 import React from 'react';
-import './MainPage.css'; // ヘッダーの部分のみ既存のCSSを再利用
+import '../../Top'; // ヘッダーの部分のみ既存のCSSを再利用
 import './MyPage.css'; // 既存のCSSを再利用
 import diningTableImage from './products/books/bible-1867195_1920.jpeg';
 import { FaHome, FaShoppingCart, FaRegNewspaper, FaUserCircle } from 'react-icons/fa';

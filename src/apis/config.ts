@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
 
-const BASE_API_URL = process.env.BASE_API_URL || 'http://localhost';
+const BASE_API_URL = process.env.BASE_API_URL || 'http://localhost:8000';
 
 export interface ResponseType<T = undefined> {
   code: number;
@@ -9,7 +9,7 @@ export interface ResponseType<T = undefined> {
 }
 
 const globalAxios = axios.create({
-  baseURL: `${BASE_API_URL}/api`,
+  baseURL: `${BASE_API_URL}`,
   timeout: 1000,
   headers: {
     'Content-type': 'application/json',

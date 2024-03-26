@@ -1,4 +1,4 @@
-import{ useState, useCallback } from 'react';
+import{ useState, useCallback, useEffect } from 'react';
 import { ProductType } from '../interfaces/product';
 import { fetchProductListApi } from '../apis/productApi';
 
@@ -12,6 +12,10 @@ export const ProductTodo = () => {
     const res = await fetchProductListApi();
     setProductList(res?.data && typeof res.data === 'object' ? res.data : []);
   }, []);
+
+  useEffect(() => {
+    fetchProductList();
+  }, [fetchProductList]);
 
   return {
     productList,

@@ -4,7 +4,7 @@ import { ProductType } from '../interfaces/product';
 
 export const fetchProductListApi = async () => {
   try {
-    const { data }: AxiosResponse<Array<ProductType>> = await globalAxios.get('/api/products');
+    const { data }: AxiosResponse<Array<ProductType>> = await globalAxios.get('/products');
     const res: ResponseType<Array<ProductType>> = {
       code: 200,
       data

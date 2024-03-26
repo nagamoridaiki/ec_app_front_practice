@@ -24,6 +24,28 @@ export const fetchProductListApi = async () => {
   }
 }
 
+export const fetchTodoDetailApi = async(id: number) => {
+  try {
+    const { data }: AxiosResponse<ProductType> = await globalAxios.get(`/product/${id}`);
+    const res: ResponseType<ProductType> = {
+      code: 200,
+      data
+    }
+    return res
+  } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: ''
+    }
+    if (isAxiosError(err)) {
+      const axiosError = err as IErrorResponse;
+      res.code = axiosError.response.status
+      res.message = axiosError.response.data.message
+    }
+    return res
+  }
+}
+
 export interface IErrorResponse {
   code: string;
   config: any;

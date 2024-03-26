@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import Top from './pages/Top'
-import DetailPage from './pages/ec/detailPage/DetailPage'
+import DetailPage from './pages/ec/detail/[id]'
 import CartPage from './pages/ec/cartPage/CartPage'
 import ProductRegistration from './pages/ec/productRegistrationPage/ProductRegistration'
 import SignIn from './pages/users/signInPage/SignIn'

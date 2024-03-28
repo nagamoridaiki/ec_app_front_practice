@@ -25,7 +25,7 @@ export const NAVIGATION_PATH = {
   SIGNIN: '/',
   SIGNUP: '/signup',
   TOP: `/product`,
-  DETAIL: `/product/detail/`,
-  CREATE: `/product/create`,
-  EDIT: `/product/edit/`,
+  DETAIL: `ec/detail/`,
+  CREATE: `ec/create`,
+  EDIT: `ec/edit/`,
 };

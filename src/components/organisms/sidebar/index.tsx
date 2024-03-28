@@ -1,50 +1,50 @@
-import './Sidebar.css'
+import styles from './styles.module.css'
 
 export const Sidebar = () => {
   return (
     <div>
-        <aside className="filters">
-          <div className="filter-section">
+        <aside className={styles.filters}>
+          <div className={styles.filterSection}>
             <h3>Availability</h3>
-            <label className="checkbox-custom">Purchase now
+            <label className={styles.checkboxCustom}>Purchase now
               <input type="checkbox" checked />
-              <span className="checkmark"></span>
+              <span className={styles.checkmark}></span>
             </label>
-            <label className="checkbox-custom">Ending soon
+            <label className={styles.checkboxCustom}>Ending soon
               <input type="checkbox" />
-              <span className="checkmark"></span>
+              <span className={styles.checkmark}></span>
             </label>
           </div>
 
-          <div className="filter-section">
+          <div className={styles.filterSection}>
             <h3>Price Range</h3>
             <label>
               Min:
-              <input type="number" placeholder="Min price" className="price-input" />
+              <input type="number" placeholder="Min price" className={styles.priceInput} />
             </label>
             <label>
               Max:
-              <input type="number" placeholder="Max price" className="price-input" />
+              <input type="number" placeholder="Max price" className={styles.priceInput} />
             </label>
           </div>
 
-          <div className="filter-section">
+          <div className={styles.filterSection}>
             <h3>Condition</h3>
-            <label className="checkbox-custom">S (New)
+            <label className={styles.checkboxCustom}>S (New)
               <input type="checkbox" />
-              <span className="checkmark"></span>
+              <span className={styles.checkmark}></span>
             </label>
-            <label className="checkbox-custom">A (Like New)
+            <label className={styles.checkboxCustom}>A (Like New)
               <input type="checkbox" />
-              <span className="checkmark"></span>
+              <span className={styles.checkmark}></span>
             </label>
-            <label className="checkbox-custom">B (Good)
+            <label className={styles.checkboxCustom}>B (Good)
               <input type="checkbox" />
-              <span className="checkmark"></span>
+              <span className={styles.checkmark}></span>
             </label>
-            <label className="checkbox-custom">C (Fair)
+            <label className={styles.checkboxCustom}>C (Fair)
               <input type="checkbox" />
-              <span className="checkmark"></span>
+              <span className={styles.checkmark}></span>
             </label>
           </div>
         </aside>

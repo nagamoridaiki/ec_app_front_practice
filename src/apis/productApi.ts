@@ -26,7 +26,7 @@ export const fetchProductListApi = async () => {
 
 export const fetchTodoDetailApi = async(id: number) => {
   try {
-    const { data }: AxiosResponse<ProductType> = await globalAxios.get(`/product/${id}`);
+    const { data }: AxiosResponse<ProductType> = await globalAxios.get(`/products/${id}`);
     const res: ResponseType<ProductType> = {
       code: 200,
       data

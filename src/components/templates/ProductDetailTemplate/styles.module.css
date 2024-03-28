@@ -1,0 +1,55 @@
+/* 商品詳細ページのスタイル */
+.productDetails {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1.666%;
+  max-width: 100%;
+  margin: 1.666% auto;
+}
+
+.productGallery {
+  flex: 1;
+  min-width: 25%; /* 画像があまりに小さくならないように */
+  margin-right: 1.666%;
+}
+
+.productGallery img {
+  width: 100%;
+  height: auto; /* 画像の比率を保持 */
+  border: 0.0833% solid #ccc;
+}
+
+.productInfo {
+  flex: 2;
+  min-width: 25%;
+}
+
+.productInfo h1 {
+  font-size: 2em;
+  margin-bottom: 0.833%;
+}
+
+.price {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 1.666%;
+}
+
+.description {
+  line-height: 1.6;
+  margin-bottom: 1.666%;
+}
+
+.addToCart {
+  padding: 0.833% 1.666%;
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 0.416%;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.addToCart:hover {
+  background-color: #4cae4c;
+}

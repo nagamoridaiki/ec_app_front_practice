@@ -1,4 +1,4 @@
-import './Products.css'
+import styles from './styles.module.css'
 import { FC } from 'react';
 import { ProductType } from '../../../interfaces/product';
 import { useProducts } from './useProducts'
@@ -12,9 +12,9 @@ export const Products: FC<Props> =
   const [{ handleMoveDetailPage }] = useProducts();
 
   return (
-    <section className="products">
+    <section className={styles.products}>
       {showProductList.map((product) => (
-        <div className="product" onClick={() => handleMoveDetailPage(product.id)}>
+        <div className={styles.product} onClick={() => handleMoveDetailPage(product.id)}>
         <img src={product.imageUrl} alt={product.imageUrl} />
         <p>{product.title}</p>
         <p>${product.price}</p>

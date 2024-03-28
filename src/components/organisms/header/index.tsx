@@ -1,31 +1,29 @@
-import './Header.css'
-import { FaHome, FaShoppingCart, FaRegNewspaper, FaUserCircle } from 'react-icons/fa';
-
+import styles from './styles.module.css'
+import { FaHome, FaShoppingCart, FaUserCircle } from 'react-icons/fa';
 
 const cartTotal = 2580; // // この値はカートの内容に基づいて動的に変更される予定
 
 export const Header = () => {
   return (
-    <div>
-      <header className="main-header">
-        <div className="logo-container">
-          <a href="/" className="home-link">
+      <header className={styles.mainHeader}>
+        <div className={styles.logoContainer}>
+          <a href="/" className={styles.homeLink}>
             <FaHome />
           </a>
         </div>
-        <div className="search-container">
-          <button className="search-btn">Q</button>
-          <input type="text" className="search-input" placeholder="Search for item" />
+        <div className={styles.searchContainer}>
+          <button className={styles.searchBtn}>Q</button>
+          <input type="text" className={styles.searchInput} placeholder="Search for item" />
         </div>
 
-        <div className="cart-info">
-          <span className="cart-total">¥{cartTotal}</span>
-          <a href="/cart" className="cart-link">
+        <div className={styles.cartInfo}>
+          <span className={styles.cartTotal}>¥{cartTotal}</span>
+          <a href="/cart" className={styles.cartLink}>
             <FaShoppingCart />
           </a>
         </div>
 
-        <nav className="main-nav">
+        <nav className={styles.mainNav}>
           <ul>
             <li><a href="/news">News</a></li>
             <li><a href="/mypage">MyPage</a></li>
@@ -33,6 +31,5 @@ export const Header = () => {
           </ul>
         </nav>
       </header>
-    </div>
   )
 }

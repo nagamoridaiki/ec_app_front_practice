@@ -3,8 +3,7 @@
 */
 .header { padding: 10px; background-color: #f8f8f8; }
 .filters { padding: 10px; background-color: #e9e9e9; width: 200px; }
-.products { display: flex; flex-wrap: wrap; padding: 10px; }
-.product { width: 220px; margin: 10px; box-shadow: 0 0 10px #ccc; }
+
 .product img { width: 100%; }
 .footer { padding: 10px; background-color: #f1f1f1; text-align: center; }
 
@@ -100,5 +99,3 @@
 /*
 ここまで商品一覧（メインコンテンツ）
 */
-
-

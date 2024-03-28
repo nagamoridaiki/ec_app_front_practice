@@ -2,7 +2,7 @@
 # Getting Started with Create React App
 
 ```
-yarn run start
+npm run dev
 ```
 http://localhost:3000/
 でブラウザから確認できる。

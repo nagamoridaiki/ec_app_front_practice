@@ -1,0 +1,58 @@
+.body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.signinContainer {
+  background-color: #fff;
+  min-width: 400px;
+  margin: auto;
+  padding: 5%;
+  box-shadow: 0 0.5% 2.5% rgba(0, 0, 0, 0.1);
+  border-radius: 2%; /* Added border-radius for rounded corners */
+}
+
+.signinForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup {
+  margin-bottom: 3%;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 1%;
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="email"],
+.formGroup input[type="password"] {
+  width: calc(100% - 5%); /* Adjust width to account for padding */
+  padding: 2.5%;
+  border: 0.1% solid #ddd;
+  border-radius: 1%; /* Adjust for rounded corners */
+  margin-bottom: 2%; /* Add space below input */
+}
+
+.signinButton {
+  padding: 2.5% 3.75%;
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 1%; /* Match the border-radius of the inputs */
+  cursor: pointer;
+  font-size: 100%; /* Adjusted for relative sizing */
+  margin-top: 2%; /* Add some space above the button */
+}
+
+.signinButton:hover {
+  background-color: #4cae4c;
+}

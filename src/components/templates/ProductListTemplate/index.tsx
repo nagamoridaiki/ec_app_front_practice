@@ -11,11 +11,9 @@ export const ProductListTemplate = () => {
 
   const { productList } = useProductContext();
 
-  const [{ showProductList }] = useProductListTemplate({
+  const [{ showProductUnits }] = useProductListTemplate({
     productList
   });
-
-  console.log("showProductListの中身1", showProductList)
 
   return (
     <div className={styles.App}>
@@ -24,7 +22,7 @@ export const ProductListTemplate = () => {
       <div className={styles.content}>
         <Sidebar />
         {/* <Products /> */}
-        {showProductList?.length > 0 && <Products showProductList={showProductList}/>}
+        {showProductUnits?.length > 0 && <Products showProductUnitList={showProductUnits}/>}
       </div>
       <div className={styles.footer}>
         {/* フッターの内容 */}

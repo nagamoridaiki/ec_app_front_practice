@@ -1,6 +1,6 @@
 import { FC, ReactNode, useContext, createContext } from 'react';
-import { ProductType } from '../interfaces/product';
 import { ProductTodo } from '../hooks/product'
+import { ProductType, showProductList } from '../../src/interfaces/product';
 
 type Props = {
   children: ReactNode;
@@ -14,7 +14,7 @@ const ProductContext = createContext({} as ProductContextType);
 
 export const ProductProvider: FC<Props> = ({ children }) => {
 
-  const { productList, } = ProductTodo();
+  const { productList } = ProductTodo();
 
   return (
     <ProductContext.Provider

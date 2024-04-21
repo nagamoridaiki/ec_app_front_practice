@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
 
-const BASE_API_URL = process.env.BASE_API_URL || 'http://localhost:8000';
+const BASE_API_URL = process.env.BASE_API_URL || 'http://localhost:3001';
 
 export interface ResponseType<T = undefined> {
   code: number;

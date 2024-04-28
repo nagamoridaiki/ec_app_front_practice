@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
-import { MyPageTemplate } from '../../components/templates/MyPageTemplate'
+import { MyPageTemplate } from '@/components/templates/MyPageTemplate'
 
-const CartPage: NextPage = () => <MyPageTemplate />
+const MyPage: NextPage = () => <MyPageTemplate />
 
-export default CartPage;
+export default MyPage;

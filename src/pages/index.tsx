@@ -1,4 +1,4 @@
-import { ProductListTemplate } from '../components/templates/ProductListTemplate'
+import { ProductListTemplate } from '@/components/templates/ProductListTemplate'
 
 export const Top = () => {
   return (

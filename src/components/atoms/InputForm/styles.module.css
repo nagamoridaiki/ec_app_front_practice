@@ -1,0 +1,6 @@
+.input {
+  padding: 1.5%;
+  border: 0.1% solid #ccc;
+  border-radius: 0.5%;
+  font-size: 100%; /* Adjusted for relative sizing */
+}

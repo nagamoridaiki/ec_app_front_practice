@@ -1,10 +1,13 @@
 import type { AppProps } from "next/app";
-import { ProductProvider } from '@/src/contexts/productContext';
+import { AuthProvider } from '@/contexts/AuthContext';
+import { ProductProvider } from '@/contexts/ProductContext';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ProductProvider>
-      <Component {...pageProps} />
-    </ProductProvider>
+    <AuthProvider>
+      <ProductProvider>
+        <Component {...pageProps} />
+      </ProductProvider>
+    </AuthProvider>
   )
 }

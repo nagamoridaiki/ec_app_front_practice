@@ -12,7 +12,7 @@ export interface ProductType {
   }[]
 }
 
-export interface showProductList {
+export interface showProduct {
   productUnitId: number;
   rank: string;
   price: number;
@@ -22,4 +22,4 @@ export interface showProductList {
   productTitle: string;
   productDescription: string | undefined;
   imageUrl: string | undefined;
-}[]
+}

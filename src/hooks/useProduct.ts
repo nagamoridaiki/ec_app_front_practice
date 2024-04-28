@@ -1,8 +1,8 @@
 import{ useState, useCallback, useEffect } from 'react';
-import { ProductType } from '../interfaces/product';
-import { fetchProductListApi } from '../apis/productApi';
+import { ProductType } from '@/interfaces/product';
+import { fetchProductListApi } from '@/apis/productApi';
 
-export const ProductTodo = () => {
+export const useProduct = () => {
 
   // productを一覧にセッティングする変数
   const [productList, setProductList] = useState<Array<ProductType>>([])

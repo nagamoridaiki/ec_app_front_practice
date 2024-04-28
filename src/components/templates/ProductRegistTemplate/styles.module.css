@@ -32,7 +32,7 @@
 .formGroup input[type="number"],
 .formGroup input[type="file"] {
   width: 100%;
-  padding: 10px;
+  padding: 2% 0% 2% 0%;
   border: 1px solid #ddd;
   border-radius: 4px;
 }

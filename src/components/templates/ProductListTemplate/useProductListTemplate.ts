@@ -1,12 +1,13 @@
-import { useMemo, useState, useCallback } from 'react';
-import { ProductType, showProductList } from '../../../interfaces/product';
+import { useMemo, useState, useCallback, useEffect,  SetStateAction, Dispatch } from 'react';
+import { ProductType, showProduct } from '../../../interfaces/product';
+
 
 type Params = {
   productList: Array<ProductType>
 }
 
 type StatesType = {
-  showProductUnits: showProductList[];
+  showProductUnits: showProduct[];
   searchKeyword: string;
 };
 
@@ -35,7 +36,7 @@ export const useProductListTemplate = ({productList}: Params) => {
   return [status] as const
 }
 
-const toProductUnitMessage = (showProduct: Array<ProductType>): showProductList[] => {
+const toProductUnitMessage = (showProduct: Array<ProductType>): showProduct[] => {
   return showProduct?.flatMap(({ productId, productTitle, productDescription, imageUrl, productUnit }) =>
     productUnit?.map(unit => ({
       productId,

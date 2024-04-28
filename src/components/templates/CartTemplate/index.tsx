@@ -1,17 +1,21 @@
 import styles from './styles.module.css';
-//import { useCartTemplate } from './useCartTemplate'
+import { useAuthContext } from '@/contexts/AuthContext';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { NAVIGATION_LIST, NAVIGATION_PATH } from '@/constants/navigation';
 import { Header } from '../../../components/organisms/header'
 import { FaTrash } from 'react-icons/fa';
+import { DropdownMenu } from '@/components/organisms/DropdownMenu'
 import diningTableImage from '../../../../public/products/books/bible-1867195_1920.jpeg';
 import chairImage from '../../../../public/products/books/book-1283468_1920.jpeg';
 
 export const CartTemplate = () => {
+  const { user, menuVisible, setMenuVisible, handleDocumentClick } = useAuthContext();
 
-  //const [{product}] = useCartTemplate()
 
   return (
-    <div className={styles.app}>
-      <Header />
+    <div className={styles.app} onClick={() => handleDocumentClick(menuVisible, setMenuVisible)}>
+      <Header user={user} />
 
       <main className={styles.cart}>
         <div className={styles["cart-details"]}>
@@ -79,6 +83,7 @@ export const CartTemplate = () => {
           <button className={styles["order-checkout"]}>Buy now $Total</button>
         </div>
       </main>
+      {menuVisible && <DropdownMenu />}
 
       <footer className={styles.footer}>
         {/* フッターの内容 */}

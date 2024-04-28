@@ -1,9 +1,18 @@
+import { FC, useState } from 'react';
 import styles from './styles.module.css'
 import { FaHome, FaShoppingCart, FaUserCircle } from 'react-icons/fa';
+import { UserType } from '@/interfaces/userType';
+import { useAuthContext } from '@/contexts/AuthContext';
 
 const cartTotal = 2580; // // この値はカートの内容に基づいて動的に変更される予定
 
-export const Header = () => {
+type Props = {
+  user: UserType | undefined
+}
+
+export const Header: FC<Props> = ({user}) => {
+  const { setMenuVisible, menuVisible } = useAuthContext();
+
   return (
       <header className={styles.mainHeader}>
         <div className={styles.logoContainer}>
@@ -18,17 +27,20 @@ export const Header = () => {
 
         <div className={styles.cartInfo}>
           <span className={styles.cartTotal}>¥{cartTotal}</span>
-          <a href="/cart" className={styles.cartLink}>
+          <a href="/ec/cart" className={styles.cartLink}>
             <FaShoppingCart />
           </a>
         </div>
 
         <nav className={styles.mainNav}>
-          <ul>
-            <li><a href="/news">News</a></li>
-            <li><a href="/mypage">MyPage</a></li>
-            <li><a href="/user"><FaUserCircle /></a></li>
-          </ul>
+            {user ? (
+              <ul onClick={() => setMenuVisible(!menuVisible)}>
+                <li>{user.name}</li>
+                <li><FaUserCircle /></li>
+              </ul>
+            ) : (
+              <a href="/login"><span>Login</span></a>
+            )}
         </nav>
       </header>
   )

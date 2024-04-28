@@ -1,5 +1,5 @@
 import styles from './styles.module.css';
-import { Header } from '../../../components/organisms/header'
+import { Header } from '@/components/organisms/header'
 import { FaTrash } from 'react-icons/fa';
 import diningTableImage from '../../../../public/products/books/bible-1867195_1920.jpeg';
 import chairImage from '../../../../public/products/books/book-1283468_1920.jpeg';

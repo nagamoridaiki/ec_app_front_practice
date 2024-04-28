@@ -9,9 +9,9 @@
  * 遷移先定義の際に使用
  */
 export const NAVIGATION_LIST = {
-  SIGNIN: '/',
-  SIGNUP: '/signup',
-  TOP: `/product`,
+  SIGNIN: `/login`,
+  SIGNUP: `/signup`,
+  TOP: `/`,
   DETAIL: `/product/detail/:id`,
   CREATE: `/product/create`,
   EDIT: `/product/edit/:id`,
@@ -22,9 +22,9 @@ export const NAVIGATION_LIST = {
  * 画面遷移時の使用
  */
 export const NAVIGATION_PATH = {
-  SIGNIN: '/',
+  SIGNIN: '/login',
   SIGNUP: '/signup',
-  TOP: `/product`,
+  TOP: `/`,
   DETAIL: `ec/detail/`,
   CREATE: `ec/create`,
   EDIT: `ec/edit/`,

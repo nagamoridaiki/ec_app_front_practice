@@ -1,28 +1,22 @@
+import { useEffect } from 'react';
 import styles from './styles.module.css';
-import { Header } from '../../../components/organisms/header'
-import { FaTrash } from 'react-icons/fa';
-import diningTableImage from '../../../../public/products/books/bible-1867195_1920.jpeg';
-import chairImage from '../../../../public/products/books/book-1283468_1920.jpeg';
+import { Header } from '@/components/organisms/header'
+import { Loginform } from '@/components/organisms/loginform/index'
+import { useAuthContext } from '@/contexts/AuthContext';
+import { useRouter } from 'next/router';
+import { NAVIGATION_LIST, NAVIGATION_PATH } from '@/constants/navigation';
 
 export const LoginTemplate = () => {
 
+  const { user } = useAuthContext();
 
   return (
-    <div className={styles.signinContainer}>
-      <h1>Login</h1>
-      <form className={styles.signinForm}>
-        <div className={styles.formGroup}>
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" required />
-        </div>
-
-        <div className={styles.formGroup}>
-          <label htmlFor="password">Password:</label>
-          <input type="password" id="password" name="password" required />
-        </div>
-
-        <button type="submit" className={styles.signinButton}>Login</button>
-      </form>
+    <div className={styles.App}>
+    <Header user={user} />
+      <div className={styles.signinContainer}>
+        <h2>Login</h2>
+        <Loginform />
+      </div>
     </div>
   )
 }

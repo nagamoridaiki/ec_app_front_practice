@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import globalAxios, { ResponseType, isAxiosError } from './config';
-import { ProductType } from '../interfaces/product';
+import { ProductType, showProduct } from '../interfaces/product';
 
 export const fetchProductListApi = async () => {
   try {
@@ -28,8 +28,8 @@ export const fetchProductListApi = async () => {
 
 export const fetchTodoDetailApi = async(id: number) => {
   try {
-    const { data }: AxiosResponse<ProductType> = await globalAxios.get(`/products/${id}`);
-    const res: ResponseType<ProductType> = {
+    const { data }: AxiosResponse<showProduct> = await globalAxios.get(`/products/${id}`);
+    const res: ResponseType<showProduct> = {
       code: 200,
       data
     }

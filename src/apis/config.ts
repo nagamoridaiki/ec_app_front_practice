@@ -8,6 +8,25 @@ export interface ResponseType<T = undefined> {
   message?: string;
 }
 
+export interface IErrorResponse {
+  code: string;
+  config: any;
+  message: string;
+  request: any;
+  response: {
+    config: any;
+    data: {
+      error: string;
+      message: string;
+      statusCode: string;
+    };
+    headers: any;
+    request: any;
+    status: number;
+    statusText: string;
+  };
+}
+
 const globalAxios = axios.create({
   baseURL: `${BASE_API_URL}`,
   timeout: 1000,

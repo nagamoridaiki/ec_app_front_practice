@@ -1,0 +1,36 @@
+/* App.module.css */
+
+.dropdownMenu {
+  position: absolute;
+  top: 50px; /* ヘッダーの高さ + 余白 */
+  right: 20px; /* 必要に応じて調整 */
+  width: 200px; /* メニューの幅 */
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  /* その他のスタイリング */
+}
+
+.dropdownMenu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdownMenu li {
+  padding: 10px;
+  border-bottom: 1px solid #cccccc;
+  cursor: pointer;
+}
+
+.dropdownMenu li:last-child {
+  border-bottom: none;
+}
+
+.dropdownMenu li:hover {
+  background-color: #f6f6f6;
+}
+
+.dropdownMenu li a {
+  text-decoration: none;
+  color: inherit;
+}

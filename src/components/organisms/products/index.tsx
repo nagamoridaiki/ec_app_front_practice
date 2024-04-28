@@ -1,10 +1,10 @@
 import styles from './styles.module.css'
 import { FC } from 'react';
-import { ProductType, showProductList } from '../../../interfaces/product';
+import { showProduct } from '@/interfaces/product';
 import { useProducts } from './useProducts'
 
 type Props = {
-  showProductUnitList: Array<showProductList>
+  showProductUnitList: Array<showProduct>
 }
 
 export const Products: FC<Props> =
@@ -17,6 +17,7 @@ export const Products: FC<Props> =
         <div className={styles.product} onClick={() => handleMoveDetailPage(product.productUnitId)}>
         <img src={product.imageUrl} alt={product.imageUrl} />
         <p>{product.productTitle}</p>
+        <p>商品状態ランク: {product.rank}</p>
         <p>${product.price}</p>
         </div>
         ))

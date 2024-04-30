@@ -4,18 +4,17 @@ import { fetchTodoDetailApi } from '../../../apis/productApi'
 import { ProductType, showProduct } from '../../../interfaces/product';
 
 type StatesType = {
-  product: showProduct | undefined;
+  product: ProductType | undefined;
 };
 
 export const useProductListTemplate = () => {
   const router = useRouter();
-  const [product, setProduct] = useState<showProduct | undefined>(undefined)
+  const [product, setProduct] = useState<ProductType | undefined>(undefined)
 
   const fetchProductDetail = useCallback(async () => {
     const targetId = router?.query?.id;
     if (!!targetId && typeof targetId === 'string' && !Number.isNaN(Number(targetId))) {
       const res = await fetchTodoDetailApi(Number(targetId))
-      console.log("resの中身", res)
 
       setProduct(res?.data && typeof res.data === 'object' ? toProductUnitMessage(res.data) : undefined)
     }
@@ -32,16 +31,12 @@ export const useProductListTemplate = () => {
   return [states] as const
 }
 
-const toProductUnitMessage = (showProduct: showProduct) => {
+const toProductUnitMessage = (showProduct: ProductType) => {
   const { productId,
     productTitle,
     productDescription,
     imageUrl,
-    productUnitId,
-    rank,
-    price,
-    createdAt,
-    updatedAt
+    productUnit,
    } = showProduct;
 
    return {
@@ -49,10 +44,6 @@ const toProductUnitMessage = (showProduct: showProduct) => {
     productTitle,
     productDescription,
     imageUrl,
-    productUnitId,
-    rank,
-    price,
-    createdAt,
-    updatedAt
+    productUnit,
   }
 }

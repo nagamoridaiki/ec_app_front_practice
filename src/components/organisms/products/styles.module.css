@@ -1,27 +1,63 @@
 /* 商品コンポーネントのスタイル */
-
 .products {
   display: flex;
   flex-wrap: wrap;
-  padding: 1%;
-  flex: 3; /* 合併されたプロパティ */
+  justify-content: space-around;
+  margin: 0 auto;
+  padding: 2%;
 }
 
 .product {
-  width: 22%;
+  flex: 1 1 30%;
   margin: 1%;
-  box-shadow: 0 0 1% #ccc;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2%;
+  padding: 1%;
   background: #fff;
+  transition: transform 0.3s ease;
+}
+
+.product:hover {
+  transform: scale(1.03);
 }
 
 .product img {
   width: 100%;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 10px;
 }
 
-.product p {
-  margin: 0.5% 0;
+.productTitle {
+  font-size: 1.2em;
+  color: #333;
+  margin-bottom: 5px;
 }
+
+.rankPriceContainer {
+  display: flex;
+  flex-wrap: wrap; /* 追加: ランクを折り返して2列にする */
+  justify-content: space-around;
+  width: 100%;
+}
+
+.rankPrice {
+  font-size: 1em;
+  color: #fff;
+  background: #666;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45%; /* これによりほぼ2列に */
+  margin-bottom: 5px; /* 下マージン追加 */
+}
+
+
+.rankS { background-color: #2196F3; } /* Brue */
+.rankA { background-color: #4CAF50; } /* Green */
+.rankB { background-color: #FFD700; } /* Amber */
+.rankC { background-color: #FFC107; } /* Yellow */

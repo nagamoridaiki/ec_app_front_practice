@@ -5,7 +5,6 @@ import { ProductType, showProduct, RegisterProductParams, CategoryType } from '.
 export const registerProductApi = async (params: RegisterProductParams) => {
   try {
     const { data } = await globalAxios.post('/products', params);
-    console.log("APIレスポンス結果", data)
 
     const res: ResponseType<ProductType> = {
       code: 200,
@@ -77,8 +76,8 @@ export const fetchProductListApi = async () => {
 
 export const fetchTodoDetailApi = async(id: number) => {
   try {
-    const { data }: AxiosResponse<showProduct> = await globalAxios.get(`/products/${id}`);
-    const res: ResponseType<showProduct> = {
+    const { data }: AxiosResponse<ProductType> = await globalAxios.get(`/products/${id}`);
+    const res: ResponseType<ProductType> = {
       code: 200,
       data
     }

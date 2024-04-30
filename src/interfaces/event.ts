@@ -19,4 +19,5 @@ export interface EventType {
   onSubmitButton: (event: FormEvent<HTMLButtonElement>) => void;
   onClickDiv: (event: MouseEvent<HTMLDivElement, MouseEvent>) => void;
   onChangeSelect: (event: ChangeEvent<HTMLSelectElement>) => void;
+  onButtonClick: (event: MouseEvent<HTMLButtonElement>) => void;
 }

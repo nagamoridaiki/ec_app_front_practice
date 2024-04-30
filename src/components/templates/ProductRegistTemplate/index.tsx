@@ -1,3 +1,4 @@
+import React, { useRef } from 'react';
 import styles from './styles.module.css';
 import { Header } from '@/components/organisms/header'
 import { FaTrash } from 'react-icons/fa';
@@ -13,6 +14,7 @@ import { InputForm } from '../../atoms/InputForm'
 export const ProductRegistTemplate = () => {
   const { user, menuVisible, setMenuVisible, handleDocumentClick } = useAuthContext();
   const { registerProduct, product, categoriesList } = useProductContext();
+  const fileInput = useRef<HTMLInputElement>(null);
 
   const [{
     title,
@@ -24,7 +26,8 @@ export const ProductRegistTemplate = () => {
     handleChangeTitle,
     handleChangeDescription,
     handleChangeImageUrl,
-    handleChangeCategoryId
+    handleChangeCategoryId,
+    imageUpload
   }] = useProductRegistTemplate({registerProduct});
 
 
@@ -55,10 +58,10 @@ export const ProductRegistTemplate = () => {
             </select>
           </div>
 
-          {/* <div className={styles.formGroup}>
-            <label htmlFor="productImage">Product Image:</label>
-            <input type="file" id="productImage" name="productImage" accept="image/*" required />
-          </div> */}
+          File: <br />
+          <input type="file" ref={fileInput} onChange={imageUpload} /><br /><br />
+          {imageUrl && <img src={imageUrl} alt="Uploaded Product" />}
+
 
           <button type="submit" className={styles.submitButton}>Register Product</button>
         </form>

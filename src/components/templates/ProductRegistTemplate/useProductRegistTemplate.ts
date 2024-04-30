@@ -5,6 +5,7 @@ import { EventType } from '@/interfaces/event';
 import { registerProductApi } from '@/apis/productApi';
 import { useRouter } from 'next/router';
 import { NAVIGATION_PATH } from '@/constants/navigation';
+import AWS from 'aws-sdk';
 
 
 type Params = {
@@ -18,12 +19,27 @@ type StatesType = {
   categoryId: number
 };
 
+const S3_BUCKET = process.env.S3_BUCKET_NAME;
+const REGION = process.env.REGION;
+
+AWS.config.update({
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY,
+  region: REGION
+});
+
+const myBucket = new AWS.S3({
+  params: { Bucket: S3_BUCKET },
+  region: REGION,
+});
+
 type ActionsType = {
   handleRegisterProduct: EventType['onSubmit'];
   handleChangeTitle: EventType['onChangeInput'];
   handleChangeDescription: EventType['onChangeInput'];
   handleChangeImageUrl: EventType['onChangeInput'];
   handleChangeCategoryId: EventType['onChangeSelect'];
+  imageUpload: EventType['onChangeInput']
 };
 
 export const useProductRegistTemplate = ({registerProduct}: Params) => {
@@ -54,23 +70,48 @@ export const useProductRegistTemplate = ({registerProduct}: Params) => {
     [registerProduct, title, description, imageUrl, categoryId, router]
   );
 
+  const imageUpload: EventType['onChangeInput'] = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      e.preventDefault();
+      const files = e.target.files;
+      const fileObject = files ? files[0] : null;
+      if (!fileObject) {
+        console.error("No file selected");
+        return;
+      }
+      const params = {
+        ACL: 'public-read',
+        Body: fileObject,
+        Bucket: S3_BUCKET,
+        ContentType: fileObject.type,
+        Key: fileObject.name
+      };
 
-  // const handleRegisterProduct = useCallback(async () => {
-  //   const res = await registerProductApi({
-  //     product_title: title,
-  //     product_description: description,
-  //     image_url: imageUrl,
-  //     category_id: categoryId
-  //   });
-  //   if (res?.code === 500) {
-  //     console.log(res.message);
-  //     return;
-  //   };
-  //   console.log("resの中身", res)
-  //   if (res.data?.productId) {
-  //     router.push(`${NAVIGATION_PATH.DETAIL}/${res.data?.productId}`);
-  //   };
-  // }, [title, description, imageUrl, categoryId]);
+      try {
+        myBucket.putObject(params)
+          .on('httpUploadProgress', (evt) => {
+            console.log(evt.loaded);
+            // Assuming there's a state or context to update progress
+            // setProgress(Math.round((evt.loaded / evt.total) * 100));
+          })
+          .send((err, data) => {
+            if (err) {
+              console.error("Upload Error:", err);
+              throw err;
+            } else {
+              console.log("Upload Success", data);
+              const imageUrl = `https://${S3_BUCKET}.s3.${REGION}.amazonaws.com/${encodeURIComponent(params.Key)}`;
+              console.log("Uploaded Image URL:", imageUrl);
+              // Assuming there's a state or context to update the image URL
+              setImageUrl(imageUrl);
+            }
+          });
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    [imageUrl]
+  )
 
   const states: StatesType = {
     title,
@@ -84,7 +125,8 @@ export const useProductRegistTemplate = ({registerProduct}: Params) => {
     handleChangeTitle,
     handleChangeDescription,
     handleChangeImageUrl,
-    handleChangeCategoryId
+    handleChangeCategoryId,
+    imageUpload
   };
 
   return [states, actions] as const;

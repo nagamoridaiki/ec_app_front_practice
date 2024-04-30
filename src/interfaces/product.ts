@@ -12,6 +12,11 @@ export interface ProductType {
   }[]
 }
 
+export interface CategoryType {
+  categoryId: number;
+  categoryName: string;
+}
+
 export interface showProduct {
   productUnitId: number;
   rank: string;
@@ -22,4 +27,11 @@ export interface showProduct {
   productTitle: string;
   productDescription: string | undefined;
   imageUrl: string | undefined;
+}
+
+export interface RegisterProductParams {
+  product_title: string;
+  product_description: string| undefined;
+  image_url: string | undefined;
+  category_id: number;
 }

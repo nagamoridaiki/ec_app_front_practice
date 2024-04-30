@@ -1,5 +1,5 @@
 import { useMemo, useState, useCallback, useEffect,  SetStateAction, Dispatch } from 'react';
-import { ProductType, showProduct } from '../../../interfaces/product';
+import { ProductType, showProduct } from '@/interfaces/product';
 
 
 type Params = {

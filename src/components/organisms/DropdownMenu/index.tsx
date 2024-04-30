@@ -15,6 +15,7 @@ export const DropdownMenu: FC<any> = () => {
         <li>保存した検索条件</li>
         <li>出品した商品</li>
         <li>購入した商品</li>
+        <li><a href="/ec/product_regist">商品登録</a></li>
         <li onClick={(event) => handleLogout(event as any)}>ログアウト</li>
       </ul>
     </div>

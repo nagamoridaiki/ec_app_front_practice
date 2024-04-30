@@ -1,6 +1,55 @@
 import { AxiosResponse } from 'axios';
 import globalAxios, { ResponseType, isAxiosError } from './config';
-import { ProductType, showProduct } from '../interfaces/product';
+import { ProductType, showProduct, RegisterProductParams, CategoryType } from '../interfaces/product';
+
+export const registerProductApi = async (params: RegisterProductParams) => {
+  try {
+    const { data } = await globalAxios.post('/products', params);
+    console.log("APIレスポンス結果", data)
+
+    const res: ResponseType<ProductType> = {
+      code: 200,
+      data
+    };
+    return res
+  } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: ''
+    };
+    if (isAxiosError(err)) {
+      const axiosError = err as IErrorResponse;
+      res.code = axiosError.response.status;
+      res.message = axiosError.response.data.message;
+    }
+    return res;
+  }
+}
+
+
+export const fetchCategoriesListApi = async () => {
+  try {
+    const { data } = await globalAxios.get('/products/category');
+    //console.log("APIレスポンス結果", data)
+
+    const res: ResponseType<Array<CategoryType>> = {
+      code: 200,
+      data
+    };
+    return res
+  } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: ''
+    };
+    if (isAxiosError(err)) {
+      const axiosError = err as IErrorResponse;
+      res.code = axiosError.response.status;
+      res.message = axiosError.response.data.message;
+    }
+    return res;
+  }
+}
 
 export const fetchProductListApi = async () => {
   try {

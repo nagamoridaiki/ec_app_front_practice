@@ -6,10 +6,7 @@ import { useAuthContext } from '@/contexts/AuthContext';
 import { Header } from '@/components/organisms/header'
 import { Sidebar } from '@/components/organisms/sidebar'
 import { Products } from '@/components/organisms/products';
-import { UserType } from '@/interfaces/userType';
 import { DropdownMenu } from '@/components/organisms/DropdownMenu'
-import { EventType } from '@/interfaces/event'
-
 
 export const ProductListTemplate = () => {
   const { productList } = useProductContext();

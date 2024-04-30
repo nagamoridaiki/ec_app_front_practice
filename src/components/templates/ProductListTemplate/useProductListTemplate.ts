@@ -1,6 +1,5 @@
-import { useMemo, useState, useCallback, useEffect,  SetStateAction, Dispatch } from 'react';
+import { useMemo, useState } from 'react';
 import { ProductType, showProduct } from '@/interfaces/product';
-
 
 type Params = {
   productList: Array<ProductType>

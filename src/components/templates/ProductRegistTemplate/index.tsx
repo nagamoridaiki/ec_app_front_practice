@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import styles from './styles.module.css';
 import { Header } from '@/components/organisms/header'
 import { FaTrash } from 'react-icons/fa';
@@ -6,20 +6,20 @@ import diningTableImage from '../../../../public/products/books/bible-1867195_19
 import chairImage from '../../../../public/products/books/book-1283468_1920.jpeg';
 import { useAuthContext } from '@/contexts/AuthContext';
 import { useProductContext } from '@/contexts/productContext';
+import { useImageContext } from '@/contexts/ImageContext';
 import { DropdownMenu } from '@/components/organisms/DropdownMenu'
 import { useProductRegistTemplate } from './useProductRegistTemplate';
-import { CommonButton } from '../../atoms/CommonButton'
 import { InputForm } from '../../atoms/InputForm'
 
 export const ProductRegistTemplate = () => {
   const { user, menuVisible, setMenuVisible, handleDocumentClick } = useAuthContext();
-  const { registerProduct, product, categoriesList } = useProductContext();
+  const { registerProduct, categoriesList } = useProductContext();
+  const { imageUrl, imageUpload } = useImageContext();
   const fileInput = useRef<HTMLInputElement>(null);
 
   const [{
     title,
     description,
-    imageUrl,
     categoryId
   }, {
     handleRegisterProduct,
@@ -27,8 +27,11 @@ export const ProductRegistTemplate = () => {
     handleChangeDescription,
     handleChangeImageUrl,
     handleChangeCategoryId,
-    imageUpload
-  }] = useProductRegistTemplate({registerProduct});
+  }] = useProductRegistTemplate({registerProduct, imageUrl});
+
+  useEffect(() => {
+    handleChangeImageUrl(imageUrl);
+  }, [imageUrl, handleChangeImageUrl]);
 
 
   return (

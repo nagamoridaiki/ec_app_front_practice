@@ -1,14 +1,14 @@
 /* 商品コンポーネントのスタイル */
 .products {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin: 0 auto;
+  align-items: flex-start;  /* 各行のアイテムを上揃えに */
+  justify-content: flex-start;  /* 左から右にアイテムを並べる */
   padding: 2%;
+  max-width: 100%; /* コンテナの最大幅設定 */
 }
 
 .product {
-  flex: 1 1 30%;
+  flex: 0 0 30%; /* 30%の幅を保持し、内容によって伸縮しない */
   margin: 1%;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   display: flex;
@@ -17,10 +17,7 @@
   padding: 1%;
   background: #fff;
   transition: transform 0.3s ease;
-}
-
-.product:hover {
-  transform: scale(1.03);
+  border-radius: 10px; /* 角を丸くする */
 }
 
 .product img {
@@ -28,32 +25,57 @@
   height: 150px;
   object-fit: cover;
   margin-bottom: 10px;
+  border-radius: 10px; /* 画像の角も丸く */
 }
 
 .productTitle {
   font-size: 1.2em;
   color: #333;
   margin-bottom: 5px;
+  font-weight: bold; /* タイトルを強調 */
 }
 
-.rankPriceContainer {
-  display: flex;
-  flex-wrap: wrap; /* 追加: ランクを折り返して2列にする */
-  justify-content: space-around;
+.rankPriceGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2列のグリッドレイアウト */
   width: 100%;
+  gap: 10px; /* グリッド間の隙間を調整 */
 }
 
 .rankPrice {
-  font-size: 1em;
-  color: #fff;
-  background: #666;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* ランクカードにシャドウを追加 */
+  background: #f8f8f8; /* 背景色を明るく */
+}
+
+.quantitySelect {
+  margin-top: 5px;
   padding: 5px 10px;
   border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 45%; /* これによりほぼ2列に */
-  margin-bottom: 5px; /* 下マージン追加 */
+  border: 1px solid #ccc; /* セレクトボックスの境界を強調 */
+}
+
+.addToCartButton {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4CAF50; /* Green */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 80%; /* ボタンの幅を調整 */
+  align-self: center; /* ボタンを中央揃え */
+}
+
+.addToCartButton:hover {
+  background-color: #45a049;
+  box-shadow: 0 4px 8px rgba(0,150,0,0.4); /* ホバー時のシャドウを強調 */
 }
 
 

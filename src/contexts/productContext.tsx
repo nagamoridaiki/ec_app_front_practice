@@ -1,6 +1,6 @@
 import { FC, ReactNode, useContext, createContext } from 'react';
 import { useProduct } from '@/hooks/useProduct'
-import { ProductType } from '@/interfaces/product';
+import { ProductType, CategoryType, RegisterProductParams } from '@/interfaces/product';
 
 type Props = {
   children: ReactNode;
@@ -8,18 +8,24 @@ type Props = {
 
 interface ProductContextType {
   productList: Array<ProductType>
+  categoriesList: Array<CategoryType>
+  registerProduct: (params: RegisterProductParams) => Promise<void>
+  product?: ProductType
 }
 
 const ProductContext = createContext({} as ProductContextType);
 
 export const ProductProvider: FC<Props> = ({ children }) => {
 
-  const { productList } = useProduct();
+  const { productList, registerProduct, product, categoriesList } = useProduct();
 
   return (
     <ProductContext.Provider
       value={{
-        productList
+        productList,
+        categoriesList,
+        registerProduct,
+        product
       }}
     >
       {children}

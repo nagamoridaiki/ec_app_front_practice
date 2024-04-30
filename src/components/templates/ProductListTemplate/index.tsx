@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 import { useProductListTemplate } from './useProductListTemplate';
 import { useEffect, useRef } from 'react'
-import { useProductContext } from '@/contexts/ProductContext';
+import { useProductContext } from '@/contexts/productContext';
 import { useAuthContext } from '@/contexts/AuthContext';
 import { Header } from '@/components/organisms/header'
 import { Sidebar } from '@/components/organisms/sidebar'

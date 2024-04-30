@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './styles.module.css';
 import { useProductListTemplate } from './useProductDetailTemplate'
 import { Header } from '@/components/organisms/header'
@@ -21,8 +22,12 @@ export const ProductDetailTemplate = () => {
           </section>
           <section className={styles.productInfo}>
             <h1>{product.productTitle}</h1>
-            <p className={styles.price}>商品状態: ランク{product.rank}</p>
-            <p className={styles.price}>{product.price}円</p>
+            {product.productUnit?.map((unit, index) => (
+              <React.Fragment key={index}>
+                <p className={styles.price}>商品状態: ランク{unit.rank}</p>
+                <p className={styles.price}>{unit.price}円</p>
+              </React.Fragment>
+            ))}
             <p className={styles.description}>{product.productDescription}</p>
             {/* その他の情報やアクションボタンなど */}
             <button className={styles.addToCart}>Add to Cart</button>

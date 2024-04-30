@@ -6,7 +6,7 @@ type Params = {
 }
 
 type StatesType = {
-  showProductUnits: showProduct[];
+  showProductUnits: ProductType[];
   searchKeyword: string;
 };
 
@@ -23,7 +23,7 @@ export const useProductListTemplate = ({productList}: Params) => {
     }) : productList;
   }, [productList, searchKeyword]);
 
-  const showProductUnits = toProductUnitMessage(showProductList)
+  const showProductUnits = showProductList
 
   const status: StatesType = {
     showProductUnits,

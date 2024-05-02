@@ -1,0 +1,37 @@
+.rankPriceGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2列のグリッドレイアウト */
+  width: 100%;
+  gap: 0.625%; /* グリッド間の隙間を調整 */
+}
+
+.rankPriceGridDetail {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2列のグリッドレイアウト */
+  width: 30%;
+  gap: 0.625%; /* グリッド間の隙間を調整 */
+}
+
+.rankPrice {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* ランクカードにシャドウを追加 */
+  background: #f8f8f8; /* 背景色を明るく */
+}
+
+.quantitySelect {
+  margin-top: 0.3125%;
+  padding: 0.3125% 0.625%;
+  border-radius: 0.3125%;
+  border: 0.0625% solid #ccc; /* セレクトボックスの境界を強調 */
+}
+
+.rankS { background-color: #2196F3; } /* Blue */
+.rankA { background-color: #4CAF50; } /* Green */
+.rankB { background-color: #FFD700; } /* Amber */
+.rankC { background-color: #FFC107; } /* Yellow */

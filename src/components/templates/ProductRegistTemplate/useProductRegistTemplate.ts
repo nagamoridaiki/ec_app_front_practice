@@ -12,7 +12,7 @@ type Params = {
 
 type StatesType = {
   title: string
-  description?: string
+  note?: string
   imageUrl?: string
   categoryId: number
 };
@@ -28,12 +28,12 @@ type ActionsType = {
 export const useProductRegistTemplate = ({registerProduct, imageUrl}: Params) => {
   const router = useRouter();
   const [ title, setTitle ] = useState<string>('');
-  const [ description, setDescription ] = useState<string| undefined>(undefined);
+  const [ note, setNote ] = useState<string| undefined>(undefined);
   const [ image, setImage ] = useState<string| undefined>(undefined);
   const [ categoryId, setCategoryId ] = useState<number>(0);
 
   const handleChangeTitle: EventType['onChangeInput'] = useCallback((event) => setTitle(event.target.value), []);
-  const handleChangeDescription: EventType['onChangeInput'] = useCallback((event) => setDescription(event.target.value), []);
+  const handleChangeDescription: EventType['onChangeInput'] = useCallback((event) => setNote(event.target.value), []);
   const handleChangeImageUrl: (imageUrl: string | undefined) => void = useCallback((imageUrl: string | undefined) => {
     setImage(imageUrl)
   }, [image, imageUrl]);
@@ -44,20 +44,20 @@ export const useProductRegistTemplate = ({registerProduct, imageUrl}: Params) =>
       e.preventDefault();
       if (title !== '' && categoryId) {
         registerProduct({
-          product_title: title,
-          product_description: description,
+          title: title,
+          note: note,
           image_url: imageUrl,
           category_id: categoryId
         });
         router.push(NAVIGATION_PATH.TOP);
       }
     },
-    [registerProduct, title, description, imageUrl, categoryId, router]
+    [registerProduct, title, note, imageUrl, categoryId, router]
   );
 
   const states: StatesType = {
     title,
-    description,
+    note,
     imageUrl,
     categoryId
   };

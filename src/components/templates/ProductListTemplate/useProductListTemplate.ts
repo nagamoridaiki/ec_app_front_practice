@@ -19,7 +19,7 @@ export const useProductListTemplate = ({productList}: Params) => {
     return searchKeyword ?
     productList?.filter((product) => {
       const regexp = new RegExp('^' + searchKeyword, 'i');
-      return product.productTitle?.match(regexp);
+      return product.title?.match(regexp);
     }) : productList;
   }, [productList, searchKeyword]);
 
@@ -35,14 +35,3 @@ export const useProductListTemplate = ({productList}: Params) => {
   return [status] as const
 }
 
-const toProductUnitMessage = (showProduct: Array<ProductType>): showProduct[] => {
-  return showProduct?.flatMap(({ productId, productTitle, productDescription, imageUrl, productUnit }) =>
-    productUnit?.map(unit => ({
-      productId,
-      productTitle,
-      productDescription,
-      imageUrl,
-      ...unit
-    })) || []
-  );
-}

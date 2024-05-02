@@ -33,17 +33,17 @@ export const useProductListTemplate = () => {
 
 const toProductUnitMessage = (showProduct: ProductType) => {
   const { productId,
-    productTitle,
-    productDescription,
+    title,
+    note,
     imageUrl,
-    productUnit,
+    inventories,
    } = showProduct;
 
    return {
     productId,
-    productTitle,
-    productDescription,
+    title,
+    note,
     imageUrl,
-    productUnit,
+    inventories,
   }
 }

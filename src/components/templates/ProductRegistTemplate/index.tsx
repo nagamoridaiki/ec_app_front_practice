@@ -19,7 +19,7 @@ export const ProductRegistTemplate = () => {
 
   const [{
     title,
-    description,
+    note,
     categoryId
   }, {
     handleRegisterProduct,
@@ -47,8 +47,8 @@ export const ProductRegistTemplate = () => {
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="productName">Product Description:</label>
-            <InputForm type="description" value={description} placeholder="description" onChange={handleChangeDescription} />
+            <label htmlFor="productName">Product Note:</label>
+            <InputForm type="note" value={note} placeholder="note" onChange={handleChangeDescription} />
           </div>
 
           <div className={styles.formGroup}>

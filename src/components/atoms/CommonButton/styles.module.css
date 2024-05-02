@@ -13,3 +13,42 @@
 .signinButton:hover {
   background-color: #4cae4c;
 }
+
+.addToCartButton {
+  margin-top: 7%;
+  padding: 5%;
+  background-color: #4CAF50; /* Green */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 80%; /* ボタンの幅を調整 */
+  align-self: center; /* ボタンを中央揃え */
+}
+
+.addToCartButtonDetail {
+  margin-top: 2%;
+  padding: 2%;
+  background-color: #4CAF50; /* Green */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 30%; /* ボタンの幅を調整 */
+  align-self: center; /* ボタンを中央揃え */
+}
+
+.addToCartButton:hover {
+  background-color: #45a049;
+  box-shadow: 0 4px 8px rgba(0,150,0,0.4); /* ホバー時のシャドウを強調 */
+}
+
+.addToCart {
+  padding: 0.833% 1.666%;
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 0.416%;
+  cursor: pointer;
+  font-size: 1em;
+}

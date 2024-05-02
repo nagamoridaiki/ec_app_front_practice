@@ -19,7 +19,7 @@ export const Loginform: FC = () => {
             <label htmlFor="password">Password:</label>
             <InputForm type="password" value={password} placeholder="password" onChange={handleChangePassword} />
           </div>
-          <CommonButton />
+          <CommonButton buttonText="Login" buttonStyle="signinButton" />
       </form>
   )
 }

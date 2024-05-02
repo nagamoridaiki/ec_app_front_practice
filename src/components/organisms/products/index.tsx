@@ -3,6 +3,8 @@ import styles from './styles.module.css';
 import { ProductType } from '@/interfaces/product';
 import { showProduct } from '@/interfaces/product';
 import { useProducts } from './useProducts'
+import { CommonButton } from '../../atoms/CommonButton'
+import { RankPriceGrid } from '@/components/molecules/RankPriceGrid'
 
 type Props = {
   showProductUnitList: Array<ProductType>
@@ -17,26 +19,11 @@ export const Products: FC<Props> = ({ showProductUnitList }) => {
       {showProductUnitList.map((parent_product) => (
         <div key={parent_product.productId} className={styles.product}>
           <div onClick={() => handleMoveDetailPage(parent_product.productId)}>
-            <img src={parent_product.imageUrl} alt={parent_product.productTitle} />
-            <p>{parent_product.productTitle}</p>
+            <img src={parent_product.imageUrl} alt={parent_product.title} />
+            <p>{parent_product.title}</p>
           </div>
-          <div className={styles.rankPriceGrid}>
-            {defaultRanks.map((rank) => {
-              const unit = parent_product.productUnit?.find(u => u.rank === rank);
-              return (
-                <div key={rank} className={`${styles.rankPrice} ${styles[`rank${rank}`]}`}>
-                  <span>{rank}</span>
-                  <span>{unit ? `¥${unit.price}` : '-'}</span>
-                  <select className={styles.quantitySelect}>
-                    {Array.from({ length: 10 }, (_, i) => (
-                      <option key={i} value={i + 1}>{i + 1}</option>
-                    ))}
-                  </select>
-                </div>
-              );
-            })}
-          </div>
-          <button className={styles.addToCartButton}>カートに入れる</button>
+          <RankPriceGrid parentProduct={parent_product} gridStyle="rankPriceGrid" />
+          <CommonButton buttonText="Add Cart" buttonStyle="addToCartButton" />
         </div>
       ))}
     </section>

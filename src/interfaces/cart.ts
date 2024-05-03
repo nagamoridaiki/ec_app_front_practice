@@ -16,20 +16,21 @@ export interface Cart {
 export interface AddCartParams {
   user_id: number,
   add_cart_object: {
-    inventory_unit_id: number,
+    inventory_id: number,
     num: number
   }[]
 }
 
 export interface CartObject {
-  inventoryUnitId: number,
+  inventoryId: number,
   addToCartCount: number
 }
 
 export interface fetchCartItem {
-  inventoryUnitId: number;
+  inventoryId: number;
   productId: number;
   rank: string;
+  num: number;
   price: number;
   products: {
     product_id: number;

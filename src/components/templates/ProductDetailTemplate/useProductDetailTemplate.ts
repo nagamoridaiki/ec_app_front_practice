@@ -9,13 +9,13 @@ import { Cart, CartObject,  AddCartParams, fetchCartItem } from '../../../interf
 
 type StatesType = {
   showCartItems: Array<fetchCartItem>
-  prevCart: Array<CartObject>
+  existingCartItems: Array<CartObject>
   product: ProductType | undefined;
 };
 
 type ActionType = {
   fetchCartItems:  (user_id: number | undefined) => Promise<void>
-  addToCart: (prevCart: Array<CartObject>, selectedUnit: Array<CartObject>, user_id: number) => Promise<void>
+  addToCart: (existingCartItems: Array<CartObject>, selectedUnit: Array<CartObject>, user_id: number) => Promise<void>
 };
 
 export const useProductDetailTemplate = (user_id: number| undefined) => {
@@ -28,43 +28,60 @@ export const useProductDetailTemplate = (user_id: number| undefined) => {
     const targetId = router?.query?.id;
     if (!!targetId && typeof targetId === 'string' && !Number.isNaN(Number(targetId))) {
       const res = await fetchTodoDetailApi(Number(targetId))
-      setProduct(res?.data && typeof res.data === 'object' ? toProductUnitMessage(res.data) : undefined)
+      setProduct(res?.data && typeof res.data === 'object' ? toProductMessage(res.data) : undefined)
+      //console.log("productの中身", product)
     }
   }, [router?.query?.id])
 
   const fetchCartItems = useCallback(async (user_id: number | undefined): Promise<void> => {
     if (!user_id) return
     const res = await fetchCartListApi(user_id);
+    //console.log("res.dataの中身", res.data) //inventory_unit_id:33
     setShowCartItems(res?.data && typeof res.data === 'object' ? res.data : []);
   }, [showCartItems]);
 
-  const addToCart = useCallback(async (prevCart: Array<CartObject>, selectedUnit: Array<CartObject>, user_id: number) => {
-    // console.log("prevCartの中身", prevCart)
+  const addToCart = useCallback(async (existingCartItems: Array<CartObject>, selectedUnit: Array<CartObject>, user_id: number) => {
+    // console.log("existingCartItemsの中身", existingCartItems)
     // console.log("selectedUnitの中身", selectedUnit)
     // console.log("user_idの中身", user_id)
 
     if (selectedUnit.length > 0 && user_id) {
-      const newCart = [...prevCart, ...selectedUnit];
+      const newCart = [...existingCartItems, ...selectedUnit];
       setCartItems(newCart);
-      //console.log("newCartの中身", newCart)
-      await addCartItemApi({
-        user_id,
-        add_cart_object: newCart.map(item => ({
-          inventory_unit_id: item.inventoryUnitId,
-          num: item.addToCartCount
-        }))
-      });
+
+      let uniqueCart
+      if (newCart.length > 2) {
+        uniqueCart = newCart.reduceRight((acc: CartObject[], item: CartObject) => {
+          const found = acc.find(x => x.inventoryId === item.inventoryId);
+          if (!found) {
+            acc.push(item);
+          }
+          return acc;
+        }, []);
+      }
+      if (uniqueCart) {
+        await addCartItemApi({
+          user_id,
+          add_cart_object: uniqueCart.map(item => ({
+            inventory_id: item.inventoryId,
+            num: item.addToCartCount
+          }))
+        });
+        setCartItems([]);
+        selectedUnit = [];
+      }
+
     } else {
       console.error('カートに入れる商品数を1以上選んでください');
     }
   }, [setCartItems]);
 
-  const prevCart = useMemo(
+  const existingCartItems = useMemo(
     () => {
       const cartObject: Array<CartObject> = showCartItems.map(item => {
         return {
-          inventoryUnitId: item.inventoryUnitId,
-          addToCartCount: showCartItems.length
+          inventoryId: item.inventoryId,
+          addToCartCount: item.num
         }
       })
       return cartObject
@@ -78,7 +95,7 @@ export const useProductDetailTemplate = (user_id: number| undefined) => {
 
   const states: StatesType = {
     showCartItems,
-    prevCart,
+    existingCartItems,
     product,
   };
 
@@ -90,7 +107,7 @@ export const useProductDetailTemplate = (user_id: number| undefined) => {
   return [states, actions] as const
 }
 
-const toProductUnitMessage = (showProduct: ProductType) => {
+const toProductMessage = (showProduct: ProductType) => {
   const { productId,
     title,
     note,

@@ -5,16 +5,16 @@ import { CartObject, fetchCartItem } from '../../../interfaces/cart';
 type Props = {
   buttonText: string;
   buttonStyle: string;
-  addToCart?: (prevCart: CartObject[], selectedUnit: CartObject[], userId: number) => Promise<void>
-  prevCart?: Array<CartObject>
-  selectedUnit?: CartObject[]
+  addToCart?: (existingCartItems: CartObject[], selected: CartObject[], userId: number) => Promise<void>
+  existingCartItems?: Array<CartObject>
+  selected?: CartObject[]
   userId?: number
 }
 
-export const CommonButton: FC<Props> = ({ buttonText, buttonStyle, addToCart, prevCart, selectedUnit, userId }) => {
+export const CommonButton: FC<Props> = ({ buttonText, buttonStyle, addToCart, existingCartItems, selected, userId }) => {
   return (
     <button type="submit" className={styles[buttonStyle]}
-      onClick={() => prevCart && selectedUnit && userId && addToCart && addToCart(prevCart, selectedUnit, userId)}
+      onClick={() => existingCartItems && selected && userId && addToCart && addToCart(existingCartItems, selected, userId)}
     >
       {buttonText}
     </button>

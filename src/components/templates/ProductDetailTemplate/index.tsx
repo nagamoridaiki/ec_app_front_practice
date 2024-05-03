@@ -13,12 +13,12 @@ export const ProductDetailTemplate = () => {
 
   const { isAuth, user, menuVisible, setMenuVisible, handleDocumentClick } = useAuthContext();
 
-  const [{product, prevCart}, { addToCart }] = useProductDetailTemplate(user?.user_id)
+  const [{product, existingCartItems}, { addToCart }] = useProductDetailTemplate(user?.user_id)
 
-  const [selectedUnit, setSelectedUnit] = useState<CartObject[]>([]);
+  const [selected, setSelected] = useState<CartObject[]>([]);
 
   // console.log("showCartItems(すでにカートにある中身)", showCartItems)
-  console.log("selectedUnitの中身", selectedUnit)
+  console.log("selectedの中身", selected)
 
 
   return (
@@ -40,17 +40,17 @@ export const ProductDetailTemplate = () => {
                 buttonText="Add Cart"
                 buttonStyle="addToCartButtonDetail"
                 addToCart={addToCart}
-                prevCart={prevCart}
-                selectedUnit={selectedUnit}
+                existingCartItems={existingCartItems}
+                selected={selected}
                 userId={user?.user_id}
               />
             </div>
             <RankPriceGrid
               parentProduct={product}
               gridStyle="rankPriceGridDetail"
-              selectedUnit={selectedUnit}
-              setSelectedUnit={setSelectedUnit}
-
+              existingCartItems={existingCartItems}
+              selected={selected}
+              setSelected={setSelected}
             />
           </section>
         </main>

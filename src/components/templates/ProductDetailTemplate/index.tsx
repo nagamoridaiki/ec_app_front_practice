@@ -3,6 +3,7 @@ import styles from './styles.module.css';
 import { useProductDetailTemplate } from './useProductDetailTemplate'
 import { Header } from '@/components/organisms/header'
 import { useAuthContext } from '@/contexts/AuthContext';
+import { useCartContext } from '@/contexts/CartContex';
 import { DropdownMenu } from '@/components/organisms/DropdownMenu'
 import { RankPriceGrid } from '@/components/molecules/RankPriceGrid'
 import { CommonButton } from '../../atoms/CommonButton'
@@ -10,16 +11,12 @@ import { Cart, CartObject,  AddCartParams, fetchCartItem } from '../../../interf
 
 export const ProductDetailTemplate = () => {
 
-
   const { isAuth, user, menuVisible, setMenuVisible, handleDocumentClick } = useAuthContext();
+  const { addToCart } = useCartContext();
 
-  const [{product, existingCartItems}, { addToCart }] = useProductDetailTemplate(user?.user_id)
+  const [{ product, existingCartItems }] = useProductDetailTemplate(user?.user_id)
 
   const [selected, setSelected] = useState<CartObject[]>([]);
-
-  // console.log("showCartItems(すでにカートにある中身)", showCartItems)
-  console.log("selectedの中身", selected)
-
 
   return (
     <div className={styles.app} onClick={() => handleDocumentClick(menuVisible, setMenuVisible)}>

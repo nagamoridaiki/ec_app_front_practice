@@ -9,19 +9,31 @@
 
 .productGallery {
   flex: 1;
-  min-width: 25%; /* 画像があまりに小さくならないように */
+  min-width: 25%;
   margin-right: 1.666%;
 }
 
 .productGallery img {
   width: 100%;
-  height: auto; /* 画像の比率を保持 */
+  height: auto;
   border: 0.0833% solid #ccc;
 }
 
 .productInfo {
-  flex: 2;
-  min-width: 25%;
+  display: flex;
+  flex: 1;
+  min-width: 70%;
+}
+.productText {
+  flex: 1;
+  max-width: 50%; /* 追加されたスタイル */
+}
+
+.description {
+  line-height: 1.6;
+  margin-bottom: 1.666%;
+  width: 100%; /* または任意のパーセンテージ */
+  word-wrap: break-word; /* 長い単語も折り返す */
 }
 
 .productInfo h1 {
@@ -32,11 +44,6 @@
 .price {
   font-size: 1.5em;
   color: #333;
-  margin-bottom: 1.666%;
-}
-
-.description {
-  line-height: 1.6;
   margin-bottom: 1.666%;
 }
 

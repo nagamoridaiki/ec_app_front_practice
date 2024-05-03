@@ -1,18 +1,32 @@
-import React, { FC } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import styles from './styles.module.css';
 import { ProductType } from '@/interfaces/product';
-import { showProduct } from '@/interfaces/product';
 import { useProducts } from '../../organisms/products/useProducts'
-import { CommonButton } from '../../atoms/CommonButton'
+import { Cart, CartObject,  AddCartParams, fetchCartItem } from '../../../interfaces/cart';
+import { EventType } from '@/interfaces/event';
 
 type Props = {
   parentProduct: ProductType,
-  gridStyle: string
+  gridStyle: string,
+  selected: CartObject[],
+  setSelected: React.Dispatch<React.SetStateAction<CartObject[]>>
+  existingCartItems?: CartObject[]
 }
 
 const defaultRanks = ['S', 'A', 'B', 'C'];
 
-export const RankPriceGrid: FC<Props> = ({ parentProduct, gridStyle }) => {
+export const RankPriceGrid: FC<Props> = ({ parentProduct, gridStyle, selected, setSelected, existingCartItems }) => {
+
+  const [hand, setHand] = useState<number>(0);
+
+  useEffect(() => {
+    if (selected) {
+      setSelected
+    }
+  }, []);
+
+  console.log("existingCartItemsの中身", existingCartItems)
+
 
   return (
     <div className={styles[gridStyle]}>
@@ -21,11 +35,25 @@ export const RankPriceGrid: FC<Props> = ({ parentProduct, gridStyle }) => {
         return (
           <div key={rank} className={`${styles.rankPrice} ${styles[`rank${rank}`]}`}>
             <span>{rank}</span>
-            <span>{unit ? `¥${unit.price}` : '-'}</span>
-            <select className={styles.quantitySelect}>
-              {Array.from({ length: 10 }, (_, i) => (
-                <option key={i} value={i + 1}>{i + 1}</option>
-              ))}
+            <span>{unit ? `¥${unit.price}` + ' ' + `(残${unit.inventoryNum})` : `在庫0`}</span>
+            <select className={styles.quantitySelect} onChange={(e) => {
+              setHand(Number(e.target.value));
+              if (unit) {
+                setSelected(prevUnits => [
+                  ...prevUnits.filter(item => item.inventoryId !== unit.inventoryId),
+                  {
+                    inventoryId: unit.inventoryId,
+                    addToCartCount: Number(e.target.value)
+                  }
+                ]);
+              }
+            }}>
+              {Array.from({ length: (unit ? unit.inventoryNum : 0) + 1 }, (_, i) => {
+                const existingCount = existingCartItems?.find(item => item.inventoryId === unit?.inventoryId)?.addToCartCount || 0;
+                return (
+                  <option key={i} value={i} selected={i === existingCount}>{i}</option>
+                );
+              })}
             </select>
           </div>
         );

@@ -26,16 +26,20 @@
   align-self: center; /* ボタンを中央揃え */
 }
 
+
 .addToCartButtonDetail {
-  margin-top: 2%;
+  margin: 2%;
   padding: 2%;
   background-color: #4CAF50; /* Green */
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  width: 30%; /* ボタンの幅を調整 */
-  align-self: center; /* ボタンを中央揃え */
+  width: 50%; /* ボタンの幅を調整 */
+}
+
+.addToCartButtonDetail:hover {
+  background-color: #4cae4c;
 }
 
 .addToCartButton:hover {

@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import globalAxios, { ResponseType, isAxiosError } from './config';
-import { ProductType, showProduct, RegisterProductParams, CategoryType } from '../interfaces/product';
+import { ProductType, RegisterProductParams, CategoryType } from '../interfaces/product';
 
 export const registerProductApi = async (params: RegisterProductParams) => {
   try {

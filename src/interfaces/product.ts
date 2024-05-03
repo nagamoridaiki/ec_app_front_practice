@@ -1,12 +1,13 @@
 export interface ProductType {
   productId: number;
-  productTitle: string;
-  productDescription?: string;
+  title: string;
+  note?: string;
   imageUrl?: string;
-  productUnit?: {
-    productUnitId: number,
+  inventories?: {
+    inventoryId: number,
     rank: string,
     price: number,
+    inventoryNum: number,
     createdAt: string,
     updatedAt: string
   }[]
@@ -17,21 +18,9 @@ export interface CategoryType {
   categoryName: string;
 }
 
-export interface showProduct {
-  productUnitId: number;
-  rank: string;
-  price: number;
-  createdAt: string;
-  updatedAt: string;
-  productId: number;
-  productTitle: string;
-  productDescription: string | undefined;
-  imageUrl: string | undefined;
-}
-
 export interface RegisterProductParams {
-  product_title: string;
-  product_description: string| undefined;
+  title: string;
+  note: string| undefined;
   image_url: string | undefined;
   category_id: number;
 }

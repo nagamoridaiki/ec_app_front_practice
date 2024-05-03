@@ -1,29 +1,51 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
+
 import styles from './styles.module.css';
 import { ProductType } from '@/interfaces/product';
-import { showProduct } from '@/interfaces/product';
 import { useProducts } from './useProducts'
 import { CommonButton } from '../../atoms/CommonButton'
 import { RankPriceGrid } from '@/components/molecules/RankPriceGrid'
+import { useAuthContext } from '@/contexts/AuthContext';
+import { useCartContext } from '@/contexts/CartContex';
+import { CartObject } from '../../../interfaces/cart';
 
 type Props = {
-  showProductUnitList: Array<ProductType>
+  showProductList: Array<ProductType>
 }
 
-const defaultRanks = ['S', 'A', 'B', 'C'];
+export const Products: FC<Props> = ({ showProductList }) => {
 
-export const Products: FC<Props> = ({ showProductUnitList }) => {
-  const [{ handleMoveDetailPage }] = useProducts();
+  const { user } = useAuthContext();
+
+  const [{ existingCartItems }, { handleMoveDetailPage }] = useProducts(user?.user_id);
+
+  const { addToCart } = useCartContext();
+
+  const [selected, setSelected] = useState<CartObject[]>([]);
+
   return (
     <section className={styles.products}>
-      {showProductUnitList.map((parent_product) => (
-        <div key={parent_product.productId} className={styles.product}>
-          <div onClick={() => handleMoveDetailPage(parent_product.productId)}>
-            <img src={parent_product.imageUrl} alt={parent_product.title} />
-            <p>{parent_product.title}</p>
+      {showProductList.map((products) => (
+        <div key={products.productId} className={styles.product}>
+          <div onClick={() => handleMoveDetailPage(products.productId)}>
+            <img src={products.imageUrl} alt={products.title} />
+            <p>{products.title}</p>
           </div>
-          <RankPriceGrid parentProduct={parent_product} gridStyle="rankPriceGrid" />
-          <CommonButton buttonText="Add Cart" buttonStyle="addToCartButton" />
+          <RankPriceGrid
+            parentProduct={products}
+            gridStyle="rankPriceGrid"
+            existingCartItems={existingCartItems}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <CommonButton
+            buttonText="Add Cart"
+            buttonStyle="addToCartButton"
+            addToCart={addToCart}
+            existingCartItems={existingCartItems}
+            selected={selected}
+            userId={user?.user_id}
+          />
         </div>
       ))}
     </section>

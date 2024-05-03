@@ -1,19 +1,20 @@
-import { useMemo, useState } from 'react';
-import { ProductType, showProduct } from '@/interfaces/product';
+import { useMemo, useState, useEffect, useCallback } from 'react';
+import { ProductType } from '@/interfaces/product';
 
 type Params = {
   productList: Array<ProductType>
+  user_id: number | undefined;
 }
 
 type StatesType = {
-  showProductUnits: ProductType[];
+  showProductList: ProductType[];
   searchKeyword: string;
 };
 
 
-export const useProductListTemplate = ({productList}: Params) => {
+export const useProductListTemplate = ({productList, user_id}: Params) => {
 
-  const [searchKeyword, setSearchKeyword] = useState('');
+  const [searchKeyword] = useState('');
 
   const showProductList = useMemo(() => {
     return searchKeyword ?
@@ -23,14 +24,12 @@ export const useProductListTemplate = ({productList}: Params) => {
     }) : productList;
   }, [productList, searchKeyword]);
 
-  const showProductUnits = showProductList
 
   const status: StatesType = {
-    showProductUnits,
-    searchKeyword
+    showProductList,
+    searchKeyword,
   }
 
-  const actions = {}
 
   return [status] as const
 }

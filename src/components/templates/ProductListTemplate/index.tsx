@@ -1,6 +1,5 @@
 import styles from './styles.module.css';
 import { useProductListTemplate } from './useProductListTemplate';
-import { useEffect, useRef } from 'react'
 import { useProductContext } from '@/contexts/productContext';
 import { useAuthContext } from '@/contexts/AuthContext';
 import { Header } from '@/components/organisms/header'
@@ -12,9 +11,13 @@ export const ProductListTemplate = () => {
   const { productList } = useProductContext();
   const { user, menuVisible, setMenuVisible, handleDocumentClick } = useAuthContext();
 
-  const [{ showProductUnits }] = useProductListTemplate({
-    productList
+
+  const [{ showProductList }] = useProductListTemplate({
+    productList,
+    user_id: user?.user_id
   });
+
+  //console.log("showCartItemsの中身", showCartItems)
 
   return (
     <div className={styles.App} onClick={() => handleDocumentClick(menuVisible, setMenuVisible)}>
@@ -22,7 +25,7 @@ export const ProductListTemplate = () => {
 
       <div className={styles.content}>
         <Sidebar />
-        {showProductUnits?.length > 0 && <Products showProductUnitList={showProductUnits}/>}
+        {showProductList?.length > 0 && <Products showProductList={showProductList}/>}
         {menuVisible && <DropdownMenu />}
       </div>
       <div className={styles.footer}>

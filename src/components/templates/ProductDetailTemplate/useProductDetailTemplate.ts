@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import { fetchTodoDetailApi } from '../../../apis/productApi'
 import { ProductType } from '../../../interfaces/product';
 
-import { addCartItemApi, fetchCartListApi } from '@/apis/cartApi';
-import { Cart, CartObject,  AddCartParams, fetchCartItem } from '../../../interfaces/cart';
+import { fetchCartListApi } from '@/apis/cartApi';
+import { CartObject, fetchCartItem } from '../../../interfaces/cart';
 
 
 type StatesType = {
@@ -71,7 +71,8 @@ export const useProductDetailTemplate = (user_id: number| undefined) => {
 }
 
 const toProductMessage = (showProduct: ProductType) => {
-  const { productId,
+  const {
+    productId,
     title,
     note,
     imageUrl,

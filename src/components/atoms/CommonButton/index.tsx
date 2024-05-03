@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 import React, { FC } from 'react';
-import { CartObject, fetchCartItem } from '../../../interfaces/cart';
+import { CartObject } from '../../../interfaces/cart';
 
 type Props = {
   buttonText: string;

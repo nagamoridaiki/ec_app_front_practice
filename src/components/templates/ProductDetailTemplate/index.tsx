@@ -7,7 +7,7 @@ import { useCartContext } from '@/contexts/CartContex';
 import { DropdownMenu } from '@/components/organisms/DropdownMenu'
 import { RankPriceGrid } from '@/components/molecules/RankPriceGrid'
 import { CommonButton } from '../../atoms/CommonButton'
-import { Cart, CartObject,  AddCartParams, fetchCartItem } from '../../../interfaces/cart';
+import { CartObject } from '../../../interfaces/cart';
 
 export const ProductDetailTemplate = () => {
 

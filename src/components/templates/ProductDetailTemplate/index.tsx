@@ -3,18 +3,19 @@ import styles from './styles.module.css';
 import { useProductDetailTemplate } from './useProductDetailTemplate'
 import { Header } from '@/components/organisms/header'
 import { useAuthContext } from '@/contexts/AuthContext';
-import { useCartContext } from '@/contexts/CartContex';
 import { DropdownMenu } from '@/components/organisms/DropdownMenu'
 import { RankPriceGrid } from '@/components/molecules/RankPriceGrid'
 import { CommonButton } from '../../atoms/CommonButton'
 import { CartObject } from '../../../interfaces/cart';
+import { useCart } from '@/hooks/useCart';
 
 export const ProductDetailTemplate = () => {
 
-  const { isAuth, user, menuVisible, setMenuVisible, handleDocumentClick } = useAuthContext();
-  const { addToCart } = useCartContext();
+  const { user, menuVisible, setMenuVisible, handleDocumentClick } = useAuthContext();
 
-  const [{ product, existingCartItems }] = useProductDetailTemplate(user?.user_id)
+  const [{ product }] = useProductDetailTemplate(user?.user_id)
+
+  const { existingCartItems, addToCart } = useCart(user?.user_id);
 
   const [selected, setSelected] = useState<CartObject[]>([]);
 

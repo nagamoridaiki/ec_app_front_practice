@@ -17,8 +17,6 @@ export const ProductListTemplate = () => {
     user_id: user?.user_id
   });
 
-  //console.log("showCartItemsの中身", showCartItems)
-
   return (
     <div className={styles.App} onClick={() => handleDocumentClick(menuVisible, setMenuVisible)}>
       <Header user={user} />

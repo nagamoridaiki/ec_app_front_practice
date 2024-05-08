@@ -10,10 +10,10 @@ import { CartObject } from '../../../interfaces/cart';
 import { useCart } from '@/hooks/useCart';
 
 type Props = {
-  showProductList: Array<ProductType>
+  initialProductList: ProductType[]
 }
 
-export const Products: FC<Props> = ({ showProductList }) => {
+export const Products: FC<Props> = ({ initialProductList }) => {
 
   const { user } = useAuthContext();
 
@@ -25,7 +25,7 @@ export const Products: FC<Props> = ({ showProductList }) => {
 
   return (
     <section className={styles.products}>
-      {showProductList.map((products) => (
+      {initialProductList.map((products) => (
         <div key={products.productId} className={styles.product}>
           <div onClick={() => handleMoveDetailPage(products.productId)}>
             <img src={products.imageUrl} alt={products.title} />

@@ -25,9 +25,6 @@ export const RankPriceGrid: FC<Props> = ({ parentProduct, gridStyle, selected, s
     }
   }, []);
 
-  console.log("existingCartItemsの中身", existingCartItems)
-
-
   return (
     <div className={styles[gridStyle]}>
       {defaultRanks.map((rank) => {
@@ -36,24 +33,25 @@ export const RankPriceGrid: FC<Props> = ({ parentProduct, gridStyle, selected, s
           <div key={rank} className={`${styles.rankPrice} ${styles[`rank${rank}`]}`}>
             <span>{rank}</span>
             <span>{unit ? `¥${unit.price}` + ' ' + `(残${unit.inventoryNum})` : `在庫0`}</span>
-            <select className={styles.quantitySelect} onChange={(e) => {
-              setHand(Number(e.target.value));
-              if (unit) {
-                setSelected(prevUnits => [
-                  ...prevUnits.filter(item => item.inventoryId !== unit.inventoryId),
-                  {
-                    inventoryId: unit.inventoryId,
-                    addToCartCount: Number(e.target.value)
-                  }
-                ]);
-              }
-            }}>
-              {Array.from({ length: (unit ? unit.inventoryNum : 0) + 1 }, (_, i) => {
-                const existingCount = existingCartItems?.find(item => item.inventoryId === unit?.inventoryId)?.addToCartCount || 0;
-                return (
-                  <option key={i} value={i} selected={i === existingCount}>{i}</option>
-                );
-              })}
+            <select
+              className={styles.quantitySelect}
+              value={existingCartItems?.find(item => item.inventoryId === unit?.inventoryId)?.addToCartCount || 0}
+              onChange={(e) => {
+                setHand(Number(e.target.value));
+                if (unit) {
+                  setSelected(prevUnits => [
+                    ...prevUnits.filter(item => item.inventoryId !== unit.inventoryId),
+                    {
+                      inventoryId: unit.inventoryId,
+                      addToCartCount: Number(e.target.value)
+                    }
+                  ]);
+                }
+              }}
+            >
+              {Array.from({ length: (unit ? unit.inventoryNum : 0) + 1 }, (_, i) => (
+                <option key={i} value={i}>{i}</option>
+              ))}
             </select>
           </div>
         );

@@ -11,11 +11,7 @@ export const ProductListTemplate = () => {
   const { productList } = useProductContext();
   const { user, menuVisible, setMenuVisible, handleDocumentClick } = useAuthContext();
 
-
-  const [{ showProductList }] = useProductListTemplate({
-    productList,
-    user_id: user?.user_id
-  });
+  const [{ initialProductList }] = useProductListTemplate({ productList });
 
   return (
     <div className={styles.App} onClick={() => handleDocumentClick(menuVisible, setMenuVisible)}>
@@ -23,7 +19,7 @@ export const ProductListTemplate = () => {
 
       <div className={styles.content}>
         <Sidebar />
-        {showProductList?.length > 0 && <Products showProductList={showProductList}/>}
+        {initialProductList?.length > 0 && <Products initialProductList={initialProductList}/>}
         {menuVisible && <DropdownMenu />}
       </div>
       <div className={styles.footer}>

@@ -1,22 +1,21 @@
-import { useMemo, useState } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { ProductType } from '@/interfaces/product';
 
 type Params = {
   productList: Array<ProductType>
-  user_id: number | undefined;
 }
 
 type StatesType = {
-  showProductList: ProductType[];
+  initialProductList: ProductType[];
   searchKeyword: string;
 };
 
-
-export const useProductListTemplate = ({productList, user_id}: Params) => {
+export const useProductListTemplate = ({productList}: Params) => {
 
   const [searchKeyword] = useState('');
+  const [initialProductList, setInitialProductList] = useState<ProductType[]>([]);
 
-  const showProductList = useMemo(() => {
+  const showProductList = useCallback(() => {
     return searchKeyword ?
     productList?.filter((product) => {
       const regexp = new RegExp('^' + searchKeyword, 'i');
@@ -24,12 +23,14 @@ export const useProductListTemplate = ({productList, user_id}: Params) => {
     }) : productList;
   }, [productList, searchKeyword]);
 
+  useEffect(() => {
+    setInitialProductList(showProductList());
+  }, [showProductList]);
 
   const status: StatesType = {
-    showProductList,
+    initialProductList,
     searchKeyword,
   }
-
 
   return [status] as const
 }

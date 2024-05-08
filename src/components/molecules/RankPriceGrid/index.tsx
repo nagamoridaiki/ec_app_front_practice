@@ -17,16 +17,15 @@ const defaultRanks = ['S', 'A', 'B', 'C'];
 
 export const RankPriceGrid: FC<Props> = ({ parentProduct, gridStyle, selected, setSelected, existingCartItems }) => {
 
-  const [hand, setHand] = useState<number>(0);
+  const [selectedCounts, setSelectedCounts] = useState<{ [key: number]: number }>({});
 
   useEffect(() => {
-    if (selected) {
-      setSelected
-    }
-  }, []);
-
-  console.log("existingCartItemsの中身", existingCartItems)
-
+    const initialCounts = existingCartItems?.reduce((acc, item) => {
+      acc[item.inventoryId] = item.addToCartCount;
+      return acc;
+    }, {} as { [key: number]: number });
+    setSelectedCounts(initialCounts || {});
+  }, [existingCartItems]);
 
   return (
     <div className={styles[gridStyle]}>
@@ -36,28 +35,31 @@ export const RankPriceGrid: FC<Props> = ({ parentProduct, gridStyle, selected, s
           <div key={rank} className={`${styles.rankPrice} ${styles[`rank${rank}`]}`}>
             <span>{rank}</span>
             <span>{unit ? `¥${unit.price}` + ' ' + `(残${unit.inventoryNum})` : `在庫0`}</span>
-            <select className={styles.quantitySelect} onChange={(e) => {
-              setHand(Number(e.target.value));
-              if (unit) {
-                setSelected(prevUnits => [
-                  ...prevUnits.filter(item => item.inventoryId !== unit.inventoryId),
-                  {
-                    inventoryId: unit.inventoryId,
-                    addToCartCount: Number(e.target.value)
-                  }
-                ]);
-              }
-            }}>
-              {Array.from({ length: (unit ? unit.inventoryNum : 0) + 1 }, (_, i) => {
-                const existingCount = existingCartItems?.find(item => item.inventoryId === unit?.inventoryId)?.addToCartCount || 0;
-                return (
-                  <option key={i} value={i} selected={i === existingCount}>{i}</option>
-                );
-              })}
-            </select>
+            {unit && (
+              <select
+                className={styles.quantitySelect}
+                value={selectedCounts[unit.inventoryId] || 0}
+                onChange={(e) => {
+                  const newCount = Number(e.target.value);
+                  setSelectedCounts(prev => ({ ...prev, [unit.inventoryId]: newCount }));
+                  setSelected(prevUnits => [
+                    ...prevUnits.filter(item => item.inventoryId !== unit.inventoryId),
+                    {
+                      inventoryId: unit.inventoryId,
+                      addToCartCount: newCount
+                    }
+                  ]);
+                }}
+              >
+                {Array.from({ length: (unit.inventoryNum || 0) + 1 }, (_, i) => (
+                  <option key={i} value={i}>{i}</option>
+                ))}
+              </select>
+            )}
           </div>
         );
       })}
     </div>
   );
 }
+

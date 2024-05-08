@@ -3,8 +3,7 @@ import styles from './styles.module.css'
 import { FaHome, FaShoppingCart, FaUserCircle } from 'react-icons/fa';
 import { UserType } from '@/interfaces/userType';
 import { useAuthContext } from '@/contexts/AuthContext';
-
-const cartTotal = 2580; // // この値はカートの内容に基づいて動的に変更される予定
+import { useCart } from '@/hooks/useCart';
 
 type Props = {
   user: UserType | undefined
@@ -12,6 +11,12 @@ type Props = {
 
 export const Header: FC<Props> = ({user}) => {
   const { setMenuVisible, menuVisible } = useAuthContext();
+
+  const { existingCartItems } = useCart(user?.user_id);
+
+  const calculateTotalAmount = () => {
+    return existingCartItems.reduce((total, item) => total + (item.price * item.addToCartCount), 0);
+  };
 
   return (
       <header className={styles.mainHeader}>
@@ -26,7 +31,7 @@ export const Header: FC<Props> = ({user}) => {
         </div>
 
         <div className={styles.cartInfo}>
-          <span className={styles.cartTotal}>¥{cartTotal}</span>
+          <span className={styles.cartTotal}>¥{calculateTotalAmount()}</span>
           <a href="/ec/cart" className={styles.cartLink}>
             <FaShoppingCart />
           </a>

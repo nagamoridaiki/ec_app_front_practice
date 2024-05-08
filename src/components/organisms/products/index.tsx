@@ -10,10 +10,10 @@ import { CartObject } from '../../../interfaces/cart';
 import { useCart } from '@/hooks/useCart';
 
 type Props = {
-  showProductList: Array<ProductType>
+  initialProductList: ProductType[]
 }
 
-export const Products: FC<Props> = ({ showProductList }) => {
+export const Products: FC<Props> = ({ initialProductList }) => {
 
   const { user } = useAuthContext();
 
@@ -22,10 +22,22 @@ export const Products: FC<Props> = ({ showProductList }) => {
   const { existingCartItems, addToCart } = useCart(user?.user_id);
 
   const [selected, setSelected] = useState<CartObject[]>([]);
+  const [showAddToCartMessage, setShowAddToCartMessage] = useState(false);
+
+  const handleAddToCart = async (selected: CartObject[]) => {
+    if (user?.user_id) {
+      await addToCart(existingCartItems, selected, user.user_id);
+      setShowAddToCartMessage(true);
+      setTimeout(() => setShowAddToCartMessage(false), 2500);
+    }
+  };
 
   return (
     <section className={styles.products}>
-      {showProductList.map((products) => (
+      {showAddToCartMessage && (
+        <div className={styles.addToCartPopup}>カートに追加しました</div>
+      )}
+      {initialProductList.map((products) => (
         <div key={products.productId} className={styles.product}>
           <div onClick={() => handleMoveDetailPage(products.productId)}>
             <img src={products.imageUrl} alt={products.title} />
@@ -41,7 +53,7 @@ export const Products: FC<Props> = ({ showProductList }) => {
           <CommonButton
             buttonText="Add Cart"
             buttonStyle="addToCartButton"
-            addToCart={addToCart}
+            addToCart={() => handleAddToCart(selected)}
             existingCartItems={existingCartItems}
             selected={selected}
             userId={user?.user_id}

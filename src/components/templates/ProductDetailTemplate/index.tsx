@@ -19,9 +19,23 @@ export const ProductDetailTemplate = () => {
 
   const [selected, setSelected] = useState<CartObject[]>([]);
 
+  const [showAddToCartMessage, setShowAddToCartMessage] = useState(false);
+
+  const handleAddToCart = async (selected: CartObject[]) => {
+    if (user?.user_id) {
+      await addToCart(existingCartItems, selected, user.user_id);
+      setShowAddToCartMessage(true);
+      setTimeout(() => setShowAddToCartMessage(false), 2500);
+    }
+  };
+
   return (
     <div className={styles.app} onClick={() => handleDocumentClick(menuVisible, setMenuVisible)}>
       <Header user={user} />
+
+      {showAddToCartMessage && (
+        <div className={styles.addToCartPopup}>カートに追加しました</div>
+      )}
 
       {!!product && (
         <main className={styles.productDetails}>
@@ -37,7 +51,7 @@ export const ProductDetailTemplate = () => {
               <CommonButton
                 buttonText="Add Cart"
                 buttonStyle="addToCartButtonDetail"
-                addToCart={addToCart}
+                addToCart={() => handleAddToCart(selected)}
                 existingCartItems={existingCartItems}
                 selected={selected}
                 userId={user?.user_id}

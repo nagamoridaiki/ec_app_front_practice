@@ -20,7 +20,6 @@ export const useCart = (user_id: number| undefined) => {
   }, [showCartItems]);
 
   const addToCart = useCallback(async (existingCartItems: Array<CartObject>, selectedUnit: Array<CartObject>, userId: number) => {
-
     if (selectedUnit.length > 0 && userId) {
       const newCart = [...existingCartItems, ...selectedUnit];
       setCartItems(newCart);

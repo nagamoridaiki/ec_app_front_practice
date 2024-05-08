@@ -8,10 +8,16 @@ import { authenticationApi } from '@/apis/authApi';
 import { useAuthContext } from '@/contexts/AuthContext';
 import { NAVIGATION_LIST, NAVIGATION_PATH } from '@/constants/navigation';
 
-export const useCart = () => {
+export const useCart = (user_id: number| undefined) => {
 
   const [cartItems, setCartItems] = useState<Array<CartObject>>([])
   const [showCartItems, setShowCartItems] = useState<Array<fetchCartItem>>([]);
+
+  const fetchCartItems = useCallback(async (user_id: number | undefined): Promise<void> => {
+    if (!user_id) return
+    const res = await fetchCartListApi(user_id);
+    setShowCartItems(res?.data && typeof res.data === 'object' ? res.data : []);
+  }, [showCartItems]);
 
   const addToCart = useCallback(async (existingCartItems: Array<CartObject>, selectedUnit: Array<CartObject>, userId: number) => {
 
@@ -58,6 +64,7 @@ export const useCart = () => {
 
   useEffect(() => {
     addToCart
+    fetchCartItems(user_id)
   }, []);
 
   return {

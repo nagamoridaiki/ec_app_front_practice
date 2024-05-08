@@ -6,8 +6,8 @@ import { useProducts } from './useProducts'
 import { CommonButton } from '../../atoms/CommonButton'
 import { RankPriceGrid } from '@/components/molecules/RankPriceGrid'
 import { useAuthContext } from '@/contexts/AuthContext';
-import { useCartContext } from '@/contexts/CartContex';
 import { CartObject } from '../../../interfaces/cart';
+import { useCart } from '@/hooks/useCart';
 
 type Props = {
   showProductList: Array<ProductType>
@@ -17,9 +17,9 @@ export const Products: FC<Props> = ({ showProductList }) => {
 
   const { user } = useAuthContext();
 
-  const [{ existingCartItems }, { handleMoveDetailPage }] = useProducts(user?.user_id);
+  const [{ handleMoveDetailPage }] = useProducts();
 
-  const { addToCart } = useCartContext();
+  const { existingCartItems, addToCart } = useCart(user?.user_id);
 
   const [selected, setSelected] = useState<CartObject[]>([]);
 

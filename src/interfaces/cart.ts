@@ -27,19 +27,34 @@ export interface CartObject {
 }
 
 export interface fetchCartItem {
+  cartId: number;
   inventoryId: number;
+  cartInventoryId: number;
+  inventoryNum: number;
   productId: number;
   rank: string;
   num: number;
   price: number;
-  products: {
-    product_id: number;
-    title: string;
-    note?: string;
-    image_url: string;
-    created_at: string;
-    updated_at: string;
-  };
+  product_id: number;
+  title: string;
+  note?: string;
+  imageUrl: string;
+  created_at: string;
+  updated_at: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface existingCartItems {
+  inventoryId: number;
+  addToCartCount: number;
+  cartId: number;
+  cartInventoryId: number;
+  imageUrl: string;
+  inventoryNum: number;
+  note: string | undefined;
+  price: number;
+  productId: number;
+  rank: string;
+  title: string;
 }

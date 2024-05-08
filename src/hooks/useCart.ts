@@ -1,7 +1,7 @@
 import{ useState, useCallback, useEffect, useMemo } from 'react';
 import { ProductType, CategoryType, RegisterProductParams } from '@/interfaces/product';
 import { fetchProductListApi, registerProductApi, fetchCategoriesListApi } from '@/apis/productApi';
-import { Cart, CartObject,  AddCartParams, fetchCartItem } from '../interfaces/cart';
+import { Cart, CartObject,  AddCartParams, fetchCartItem, existingCartItems } from '../interfaces/cart';
 import { UserType } from '@/interfaces/userType'
 import { addCartItemApi, fetchCartListApi } from '@/apis/cartApi';
 import { authenticationApi } from '@/apis/authApi';
@@ -52,10 +52,19 @@ export const useCart = (user_id: number| undefined) => {
 
   const existingCartItems = useMemo(
     () => {
-      const cartObject: Array<CartObject> = showCartItems.map(item => {
+      const cartObject: existingCartItems[] = showCartItems.map(item => {
         return {
           inventoryId: item.inventoryId,
-          addToCartCount: item.num
+          addToCartCount: item.num,
+          cartId: item.cartId,
+          cartInventoryId: item.cartInventoryId,
+          imageUrl: item.imageUrl,
+          inventoryNum: item.inventoryNum,
+          note: item.note,
+          price: item.price,
+          productId: item.productId,
+          rank: item.rank,
+          title: item.title
         }
       })
       return cartObject
@@ -64,10 +73,13 @@ export const useCart = (user_id: number| undefined) => {
 
   useEffect(() => {
     addToCart
-    fetchCartItems(user_id)
-  }, []);
+    if (user_id) {
+      fetchCartItems(user_id);
+    }
+  }, [user_id]);
 
   return {
+    fetchCartItems,
     showCartItems,
     existingCartItems,
     addToCart

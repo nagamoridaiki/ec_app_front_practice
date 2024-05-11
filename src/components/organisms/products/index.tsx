@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react';
-
 import styles from './styles.module.css';
 import { ProductType } from '@/interfaces/product';
 import { useProducts } from './useProducts'

@@ -1,9 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import styles from './styles.module.css';
 import { ProductType } from '@/interfaces/product';
-import { useProducts } from '../../organisms/products/useProducts'
-import { Cart, CartObject,  AddCartParams, fetchCartItem } from '../../../interfaces/cart';
-import { EventType } from '@/interfaces/event';
+import { CartObject } from '../../../interfaces/cart';
 
 type Props = {
   parentProduct: ProductType,
@@ -15,7 +13,7 @@ type Props = {
 
 const defaultRanks = ['S', 'A', 'B', 'C'];
 
-export const RankPriceGrid: FC<Props> = ({ parentProduct, gridStyle, selected, setSelected, existingCartItems }) => {
+export const RankPriceGrid: FC<Props> = ({ parentProduct, gridStyle, setSelected, existingCartItems }) => {
 
   const [selectedCounts, setSelectedCounts] = useState<{ [key: number]: number }>({});
 

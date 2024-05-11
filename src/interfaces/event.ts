@@ -1,13 +1,5 @@
-/**
- * Event
- *
- * @package interface
- */
 import { MouseEvent, ChangeEvent, KeyboardEvent, FocusEvent, FormEvent } from 'react';
 
-/**
- * EventType
- */
 export interface EventType {
   onClick: (event: MouseEvent<HTMLInputElement>) => void;
   onChangeInput: (event: ChangeEvent<HTMLInputElement>) => void;

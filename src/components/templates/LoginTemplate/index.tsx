@@ -1,5 +1,5 @@
 import styles from './styles.module.css';
-import { Header } from '@/components/organisms/header'
+import { Header } from '@/components/organisms/Header'
 import { Loginform } from '@/components/organisms/loginform/index'
 import { useAuthContext } from '@/contexts/AuthContext';
 

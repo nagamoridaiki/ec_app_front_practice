@@ -1,0 +1,50 @@
+.cartSummary {
+  flex: 1;
+  border: 1px solid #ccc;
+  padding: 2%;
+}
+
+.orderItems {
+  margin-bottom: 2%;
+}
+
+.orderItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1%;
+}
+
+.promoCodeContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2%;
+}
+
+.promoCodeInput {
+  flex: 1;
+  margin-right: 1%;
+}
+
+.promoCodeApply {
+  padding: 1% 2%;
+  background-color: #ddd;
+  border: none;
+  cursor: pointer;
+}
+
+.promoCodeApply:hover {
+  background-color: #ccc;
+}
+
+.orderTotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2em;
+  margin-bottom: 2%
+}
+
+.totalPrice {
+  font-weight: bold;
+}
+
+

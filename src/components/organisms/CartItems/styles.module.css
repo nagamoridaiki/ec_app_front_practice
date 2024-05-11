@@ -1,0 +1,80 @@
+.cartDetails {
+  flex: 2;
+  margin-right: 5%;
+}
+
+.cartItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2%; /* Updated from px to % */
+}
+
+.cartItemImage {
+  width: 10%; /* Updated from px to % - 画像のサイズは適宜調整 */
+  height: 10%; /* Updated from px to % */
+  margin-right: 2%; /* Updated from px to % */
+  object-fit: cover; /* 画像が枠に収まるように調整 */
+}
+
+.cartItemDescription {
+  flex-grow: 1;
+}
+
+.cartItemTitle {
+  margin: 0;
+  font-size: 1.1em; /* Font size adjustments remain in em for scalability */
+}
+
+.cartItemPrice {
+  font-size: 1em; /* Font size adjustments remain in em for scalability */
+  color: #555;
+}
+
+.cartItemActions {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Creates space between the remove button and quantity controls */
+}
+
+.cartItemRemove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex; /* Use inline-flex for proper alignment */
+  align-items: center;
+  color: #333;
+  font-weight: bold;
+  gap: 4px; /* Space between text and icon */
+  font-size: 14px; /* Adjust font size as necessary */
+}
+
+.cartItemRemove svg {
+  width: 16px; /* Adjust icon size as necessary */
+  height: 16px;
+}
+
+.quantityControls {
+  display: inline-flex; /* Use inline-flex for aligning the buttons and input */
+  align-items: stretch; /* Stretch the buttons to match input height */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+.quantityInput {
+  width: 40px; /* Fixed width for the input */
+  text-align: center;
+  border: none;
+  padding: 5px;
+  margin: 0; /* Remove margin */
+}
+
+.quantityInput::-webkit-inner-spin-button,
+.quantityInput::-webkit-outer-spin-button {
+  -webkit-appearance: none; /* Hide the default number input spinners */
+}
+
+/* Add a hover effect for interactive elements */
+.cartItemRemove:hover {
+  background-color: #f2f2f2;
+}

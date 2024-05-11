@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './styles.module.css';
 import { useProductDetailTemplate } from './useProductDetailTemplate'
-import { Header } from '@/components/organisms/header'
+import { Header } from '@/components/organisms/Header'
 import { useAuthContext } from '@/contexts/AuthContext';
 import { DropdownMenu } from '@/components/organisms/DropdownMenu'
 import { RankPriceGrid } from '@/components/molecules/RankPriceGrid'

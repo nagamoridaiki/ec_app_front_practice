@@ -1,25 +1,11 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { ProductType } from '@/interfaces/product';
+import { ProductType, MergedProductType, ProductInventoryType } from '@/interfaces/product';
 import { Cart, CartObject,  AddCartParams, fetchCartItem, existingCartItems } from '@/interfaces/cart';
 
 type Params = {
   productList: Array<ProductType>
   existingCartItems: Array<existingCartItems>
 }
-
-type ProductInventoryType = {
-  productId: number;
-  imageUrl: string | undefined;
-  title: string;
-  inventoryId: number;
-  price: number;
-  rank: string;
-  inventoryNum: number;
-};
-
-type MergedProductType = ProductInventoryType & {
-  inCartNum: number;
-};
 
 type StatesType = {
   inCartProducts: MergedProductType[]

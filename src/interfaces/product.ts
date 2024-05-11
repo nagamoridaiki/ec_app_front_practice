@@ -1,16 +1,18 @@
+export interface InventoryType {
+  inventoryId: number,
+  rank: string,
+  price: number,
+  inventoryNum: number,
+  createdAt?: string,
+  updatedAt?: string
+}
+
 export interface ProductType {
   productId: number;
   title: string;
   note?: string;
   imageUrl?: string;
-  inventories?: {
-    inventoryId: number,
-    rank: string,
-    price: number,
-    inventoryNum: number,
-    createdAt: string,
-    updatedAt: string
-  }[]
+  inventories?: InventoryType[]
 }
 
 export interface CategoryType {
@@ -24,3 +26,11 @@ export interface RegisterProductParams {
   image_url: string | undefined;
   category_id: number;
 }
+
+export type ProductInventoryType = ProductType & InventoryType;
+
+
+export type MergedProductType = ProductType & InventoryType & {
+  inCartNum: number;
+};
+

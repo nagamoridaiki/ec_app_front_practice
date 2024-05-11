@@ -5,7 +5,7 @@
   border-radius: 0.5%;
   background-color: #5cb85c;
   color: white;
-  font-size: 100%; /* Adjusted for relative sizing */
+  font-size: 100%;
   cursor: pointer;
   transition: background-color 0.2s;
 }
@@ -44,7 +44,7 @@
 
 .addToCartButton:hover {
   background-color: #45a049;
-  box-shadow: 0 4px 8px rgba(0,150,0,0.4); /* ホバー時のシャドウを強調 */
+  box-shadow: 0 4px 8px rgba(0,150,0,0.4)
 }
 
 .addToCart {
@@ -55,4 +55,19 @@
   border-radius: 0.416%;
   cursor: pointer;
   font-size: 1em;
+}
+
+.orderCheckout {
+  width: 100%;
+  padding: 1%; /* Updated from px to % */
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 0.5%;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.orderCheckout:hover {
+  background-color: #4cae4c;
 }

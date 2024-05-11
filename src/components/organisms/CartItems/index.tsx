@@ -1,5 +1,4 @@
-import React, { FC, useState } from 'react';
-
+import React, { FC } from 'react';
 import styles from './styles.module.css';
 import { MergedProductType } from '@/interfaces/product';
 import { FaTrash } from 'react-icons/fa';

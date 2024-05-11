@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 import { useAuthContext } from '@/contexts/AuthContext';
-import { Header } from '../../../components/organisms/header'
+import { Header } from '../../organisms/Header'
 import { DropdownMenu } from '@/components/organisms/DropdownMenu'
 import { CartItems } from '@/components/organisms/CartItems'
 import { SellingOrderConfirm } from '@/components/organisms/SellingOrderConfirm'

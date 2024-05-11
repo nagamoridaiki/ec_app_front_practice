@@ -2,9 +2,9 @@ import styles from './styles.module.css';
 import { useProductListTemplate } from './useProductListTemplate';
 import { useProductContext } from '@/contexts/productContext';
 import { useAuthContext } from '@/contexts/AuthContext';
-import { Header } from '@/components/organisms/header'
-import { Sidebar } from '@/components/organisms/sidebar'
-import { Products } from '@/components/organisms/products';
+import { Header } from '@/components/organisms/Header'
+import { Sidebar } from '@/components/organisms/Sidebar'
+import { Products } from '@/components/organisms/Products';
 import { DropdownMenu } from '@/components/organisms/DropdownMenu'
 
 export const ProductListTemplate = () => {

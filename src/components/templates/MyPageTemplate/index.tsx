@@ -1,12 +1,7 @@
 import styles from './styles.module.css';
-import { useEffect } from 'react'
-import { Header } from '../../../components/organisms/header'
+import { Header } from '../../organisms/Header'
 import { useAuthContext } from '@/contexts/AuthContext';
-import { useRouter } from 'next/router';
 import { DropdownMenu } from '@/components/organisms/DropdownMenu'
-import { NAVIGATION_LIST, NAVIGATION_PATH } from '@/constants/navigation';
-import diningTableImage from '../../../../public/products/books/bible-1867195_1920.jpeg';
-import chairImage from '../../../../public/products/books/book-1283468_1920.jpeg';
 
 export const MyPageTemplate = () => {
 

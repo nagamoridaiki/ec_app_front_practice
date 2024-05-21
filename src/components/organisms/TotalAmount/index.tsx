@@ -7,7 +7,7 @@ type Props = {
   inCartProducts: MergedProductType[]
 }
 
-export const SellingOrderConfirm: FC<Props> = ({ inCartProducts }) => {
+export const TotalAmount: FC<Props> = ({ inCartProducts }) => {
 
   return (
     <div className={styles.cartSummary}>
@@ -28,7 +28,7 @@ export const SellingOrderConfirm: FC<Props> = ({ inCartProducts }) => {
         </span>
       </div>
       <CommonButton
-        buttonText="注文する"
+        buttonText="購入に進む"
         buttonStyle="orderCheckout"
       />
     </div>

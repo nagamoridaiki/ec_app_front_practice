@@ -3,7 +3,7 @@ import { useAuthContext } from '@/contexts/AuthContext';
 import { Header } from '../../organisms/Header'
 import { DropdownMenu } from '@/components/organisms/DropdownMenu'
 import { CartItems } from '@/components/organisms/CartItems'
-import { SellingOrderConfirm } from '@/components/organisms/SellingOrderConfirm'
+import { TotalAmount } from '@/components/organisms/TotalAmount'
 import { useCart } from '@/hooks/useCart';
 import { useProductContext } from '@/contexts/productContext';
 import { useCartTemplate } from './useCartTemplate'
@@ -20,7 +20,7 @@ export const CartTemplate = () => {
       <Header user={user} />
       <main className={styles.cart}>
         <CartItems inCartProducts={inCartProducts} removeFromCart={removeFromCart} updateQuantity={updateQuantity} />
-        <SellingOrderConfirm inCartProducts={inCartProducts} />
+        <TotalAmount inCartProducts={inCartProducts} />
       </main>
       {menuVisible && <DropdownMenu />}
       <footer className={styles.footer}>

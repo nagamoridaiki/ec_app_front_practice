@@ -11,9 +11,9 @@ import { useCartTemplate } from './useCartTemplate'
 export const CartTemplate = () => {
   const { user, menuVisible, setMenuVisible, handleDocumentClick } = useAuthContext();
   const { productList } = useProductContext();
-  const { existingCartItems } = useCart(user?.user_id);
+  const { inCartProducts, setInCartProducts } = useCart(user?.user_id, productList);
 
-  const [{ inCartProducts, removeFromCart, updateQuantity }] = useCartTemplate({ productList, existingCartItems });
+  const [{ removeFromCart, updateQuantity }] = useCartTemplate({ setInCartProducts });
 
   return (
     <div className={styles.app} onClick={() => handleDocumentClick(menuVisible, setMenuVisible)}>

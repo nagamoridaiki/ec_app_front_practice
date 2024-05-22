@@ -18,12 +18,14 @@ export const SellFormTemplate = () => {
   const { user, menuVisible, setMenuVisible, handleDocumentClick } = useAuthContext();
 
   const { productList } = useProductContext();
-  const { existingCartItems } = useCart(user?.user_id);
+  const { inCartProducts } = useCart(user?.user_id, productList);
+
 
   const [
-    { paymentMethod, shippingOption, deliveryDates },
-    { handlePaymentChange, handleShippingChange, setDeliveryDate, setDeliveryTime }
+    { paymentMethod, shippingOption, deliveryDates, deliveryTime, selectDeliveryDates },
+    { handlePaymentChange, handleShippingChange, setDeliveryDate, setDeliveryTime, setSelectDeliveryDates }
   ] = useSellFormTemplate({ productList });
+
 
   return (
     <div className={styles.app} onClick={() => handleDocumentClick(menuVisible, setMenuVisible)}>
@@ -102,7 +104,10 @@ export const SellFormTemplate = () => {
             <div className={styles.takkyubinInfo}>
               <div className={styles.inputGroup}>
                 <label htmlFor="deliveryDate" className={styles.label}>配達日</label>
-                <select id="deliveryDate" className={styles.select} onChange={(e) => setDeliveryDate(e.target.value)}>
+                <select id="deliveryDate" className={styles.select} onChange={(e) => {
+                  setDeliveryDate(e.target.value);
+                  setSelectDeliveryDates(e.target.value);
+                }}>
                   {deliveryDates.map((date, index) => (
                     <option key={index} value={date}>{date}</option>
                   ))}
@@ -125,10 +130,24 @@ export const SellFormTemplate = () => {
           </div>
         </form>
         <div className={styles.summary}>
-          <div className={styles.summaryItem}><span>商品合計</span><span>¥3000</span></div>
+          {inCartProducts.map((product, index) => (
+            <div key={index} className={styles.summaryItem}>
+              <span>{product.title} x{product.inCartNum}</span>
+              <span>¥{product.price * product.inCartNum}</span>
+            </div>
+          ))}
+          <div className={styles.summaryItem}>
+            <span>商品合計</span>
+            <span>¥{inCartProducts.reduce((total, product) => total + (product.price * product.inCartNum), 0)}</span>
+          </div>
           <div className={styles.summaryItem}><span>送料</span><span>¥600</span></div>
           <div className={styles.summaryItem}><span>手数料</span><span>¥300</span></div>
-          <div className={styles.summaryItem}><span>合計</span><span className={styles.total}>¥3900</span></div>
+          <div className={styles.summaryItem}>
+            <span>合計</span>
+            <span className={styles.total}>
+              ¥{inCartProducts.reduce((total, product) => total + (product.price * product.inCartNum), 0) + 600 + 300}
+            </span>
+          </div>
         </div>
       </div>
     </div>

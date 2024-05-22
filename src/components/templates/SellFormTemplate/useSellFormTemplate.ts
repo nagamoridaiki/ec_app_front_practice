@@ -10,12 +10,15 @@ type ActionType = {
   handleShippingChange: (event: React.ChangeEvent<HTMLSelectElement>) => void
   setDeliveryDate: React.Dispatch<React.SetStateAction<string>>
   setDeliveryTime: React.Dispatch<React.SetStateAction<string>>
+  setSelectDeliveryDates: React.Dispatch<React.SetStateAction<string>>
 }
 
 type StatesType = {
   paymentMethod: string,
   shippingOption: string,
-  deliveryDates: string[]
+  deliveryDates: string[],
+  deliveryTime: string,
+  selectDeliveryDates: string,
 };
 
 export const useSellFormTemplate = ({productList}: Params) => {
@@ -25,6 +28,7 @@ export const useSellFormTemplate = ({productList}: Params) => {
   const [deliveryDate, setDeliveryDate] = useState('');
   const [deliveryTime, setDeliveryTime] = useState('');
   const [deliveryDates, setDeliveryDates] = useState<string[]>([]);
+  const [selectDeliveryDates, setSelectDeliveryDates] = useState('');
 
   const handlePaymentChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setPaymentMethod(event.target.value);
@@ -53,14 +57,17 @@ export const useSellFormTemplate = ({productList}: Params) => {
   const status: StatesType = {
     paymentMethod,
     shippingOption,
-    deliveryDates
+    deliveryDates,
+    deliveryTime,
+    selectDeliveryDates
   }
 
   const action: ActionType = {
     handlePaymentChange,
     handleShippingChange,
     setDeliveryDate,
-    setDeliveryTime
+    setDeliveryTime,
+    setSelectDeliveryDates
   }
 
   return [status, action] as const

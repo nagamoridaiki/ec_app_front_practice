@@ -3,7 +3,7 @@ import { useAuthContext } from '@/contexts/AuthContext';
 import { Header } from '../../organisms/Header'
 import { DropdownMenu } from '@/components/organisms/DropdownMenu'
 import { CartItems } from '@/components/organisms/CartItems'
-import { SellingOrderConfirm } from '@/components/organisms/SellingOrderConfirm'
+import { TotalAmount } from '@/components/organisms/TotalAmount'
 import { useCart } from '@/hooks/useCart';
 import { useProductContext } from '@/contexts/productContext';
 import { useCartTemplate } from './useCartTemplate'
@@ -11,16 +11,16 @@ import { useCartTemplate } from './useCartTemplate'
 export const CartTemplate = () => {
   const { user, menuVisible, setMenuVisible, handleDocumentClick } = useAuthContext();
   const { productList } = useProductContext();
-  const { existingCartItems } = useCart(user?.user_id);
+  const { inCartProducts, setInCartProducts } = useCart(user?.user_id, productList);
 
-  const [{ inCartProducts, removeFromCart, updateQuantity }] = useCartTemplate({ productList, existingCartItems });
+  const [{ removeFromCart, updateQuantity }] = useCartTemplate({ setInCartProducts });
 
   return (
     <div className={styles.app} onClick={() => handleDocumentClick(menuVisible, setMenuVisible)}>
       <Header user={user} />
       <main className={styles.cart}>
         <CartItems inCartProducts={inCartProducts} removeFromCart={removeFromCart} updateQuantity={updateQuantity} />
-        <SellingOrderConfirm inCartProducts={inCartProducts} />
+        <TotalAmount inCartProducts={inCartProducts} />
       </main>
       {menuVisible && <DropdownMenu />}
       <footer className={styles.footer}>

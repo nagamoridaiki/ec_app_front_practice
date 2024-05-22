@@ -1,38 +1,35 @@
-import{ useState, useCallback, useEffect, useMemo } from 'react';
-import { ProductType, CategoryType, RegisterProductParams } from '@/interfaces/product';
-import { fetchProductListApi, registerProductApi, fetchCategoriesListApi } from '@/apis/productApi';
-import { Cart, CartObject,  AddCartParams, fetchCartItem, existingCartItems } from '../interfaces/cart';
-import { UserType } from '@/interfaces/userType'
+import { useState, useCallback, useEffect, useMemo } from 'react';
+import { ProductType, MergedProductType, ProductInventoryType } from '@/interfaces/product';
+import { CartObject, fetchCartItem, existingCartItems } from '../interfaces/cart';
 import { addCartItemApi, fetchCartListApi } from '@/apis/cartApi';
-import { authenticationApi } from '@/apis/authApi';
-import { useAuthContext } from '@/contexts/AuthContext';
-import { NAVIGATION_LIST, NAVIGATION_PATH } from '@/constants/navigation';
+import { useLimitedEffect } from './useLimitedEffect';
 
-export const useCart = (user_id: number| undefined) => {
-
-  const [cartItems, setCartItems] = useState<Array<CartObject>>([])
+export const useCart = (user_id: number | undefined, productList: Array<ProductType> = []) => {
+  const [cartItems, setCartItems] = useState<Array<CartObject>>([]);
   const [showCartItems, setShowCartItems] = useState<Array<fetchCartItem>>([]);
+  const [inCartProducts, setInCartProducts] = useState<MergedProductType[]>([]);
+  const [productInventories, setProductInventories] = useState<ProductInventoryType[]>([]);
 
   const fetchCartItems = useCallback(async (user_id: number | undefined): Promise<void> => {
-    if (!user_id) return
+    if (!user_id) return;
     const res = await fetchCartListApi(user_id);
     setShowCartItems(res?.data && typeof res.data === 'object' ? res.data : []);
-  }, [showCartItems]);
+  }, []);
 
   const addToCart = useCallback(async (existingCartItems: Array<CartObject>, selectedUnit: Array<CartObject>, userId: number) => {
     if (selectedUnit.length > 0 && userId) {
       const newCart = [...existingCartItems, ...selectedUnit];
       setCartItems(newCart);
 
-      let uniqueCart
-      uniqueCart = newCart.reduceRight((acc: CartObject[], item: CartObject) => {
+      const uniqueCart = newCart.reduceRight((acc: CartObject[], item: CartObject) => {
         const found = acc.find(x => x.inventoryId === item.inventoryId);
         if (!found) {
           acc.push(item);
         }
         return acc;
       }, []);
-      if (uniqueCart) {
+
+      if (uniqueCart.length > 0) {
         await addCartItemApi({
           user_id: userId,
           add_cart_object: uniqueCart.map(item => ({
@@ -41,46 +38,76 @@ export const useCart = (user_id: number| undefined) => {
           }))
         });
         setCartItems([]);
-        selectedUnit = [];
       }
-
     } else {
       console.error('カートに入れる商品数を1以上選んでください');
     }
-  }, [setCartItems]);
+  }, []);
 
-  const existingCartItems = useMemo(
-    () => {
-      const cartObject: existingCartItems[] = showCartItems.map(item => {
+  const existingCartItemsMemo = useMemo(() => {
+    return showCartItems.map(item => ({
+      inventoryId: item.inventoryId,
+      addToCartCount: item.num,
+      cartId: item.cartId,
+      cartInventoryId: item.cartInventoryId,
+      imageUrl: item.imageUrl,
+      inventoryNum: item.inventoryNum,
+      note: item.note,
+      price: item.price,
+      productId: item.productId,
+      rank: item.rank,
+      title: item.title
+    }));
+  }, [showCartItems]);
+
+  const inventories = useMemo(() => productList.flatMap(product => {
+    return product.inventories ? product.inventories.map(inventory => ({
+      productId: product.productId,
+      imageUrl: product.imageUrl || '',
+      title: product.title,
+      inventoryId: inventory.inventoryId,
+      price: inventory.price,
+      rank: inventory.rank,
+      inventoryNum: inventory.inventoryNum
+    })) : [];
+  }), [productList]);
+
+  useLimitedEffect(() => {
+    setProductInventories(inventories);
+  }, [inventories], 10);
+
+  const mergeProductsWithCart = useCallback(() => {
+    const mergedProducts = existingCartItemsMemo.map(cartItem => {
+      const foundProduct = productInventories.find(product => product.inventoryId === cartItem.inventoryId);
+      if (foundProduct) {
         return {
-          inventoryId: item.inventoryId,
-          addToCartCount: item.num,
-          cartId: item.cartId,
-          cartInventoryId: item.cartInventoryId,
-          imageUrl: item.imageUrl,
-          inventoryNum: item.inventoryNum,
-          note: item.note,
-          price: item.price,
-          productId: item.productId,
-          rank: item.rank,
-          title: item.title
-        }
-      })
-      return cartObject
-    }, [showCartItems]
-  )
+          ...foundProduct,
+          inCartNum: cartItem.addToCartCount
+        } as MergedProductType;
+      } else {
+        return null;
+      }
+    }).filter(product => product !== null) as MergedProductType[];
 
-  useEffect(() => {
-    addToCart
+    setInCartProducts(mergedProducts);
+  }, [existingCartItemsMemo]);
+
+  useLimitedEffect(() => {
     if (user_id) {
       fetchCartItems(user_id);
     }
-  }, [user_id]);
+  }, [user_id], 10);
+
+  useLimitedEffect(() => {
+    mergeProductsWithCart();
+  }, [mergeProductsWithCart], 10);
 
   return {
     fetchCartItems,
     showCartItems,
-    existingCartItems,
-    addToCart
-  }
+    existingCartItems: existingCartItemsMemo,
+    addToCart,
+    inCartProducts,
+    setInCartProducts
+  };
 }

@@ -4,7 +4,7 @@ import { useAuthContext } from '@/contexts/AuthContext';
 import { Header } from '../../organisms/Header';
 import { useCart } from '@/hooks/useCart';
 import { useProductContext } from '@/contexts/productContext';
-import { useSellFormTemplate } from './useSellFormTemplate'
+import { useSellFormTemplate } from './useSellFormTemplate';
 
 const prefectures = [
   "北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県",
@@ -16,16 +16,13 @@ const prefectures = [
 
 export const SellFormTemplate = () => {
   const { user, menuVisible, setMenuVisible, handleDocumentClick } = useAuthContext();
-
   const { productList } = useProductContext();
   const { inCartProducts } = useCart(user?.user_id, productList);
-
 
   const [
     { paymentMethod, shippingOption, deliveryDates, deliveryTime, selectDeliveryDates },
     { handlePaymentChange, handleShippingChange, setDeliveryDate, setDeliveryTime, setSelectDeliveryDates }
   ] = useSellFormTemplate({ productList });
-
 
   return (
     <div className={styles.app} onClick={() => handleDocumentClick(menuVisible, setMenuVisible)}>
@@ -130,21 +127,25 @@ export const SellFormTemplate = () => {
           </div>
         </form>
         <div className={styles.summary}>
-          {inCartProducts.map((product, index) => (
-            <div key={index} className={styles.summaryItem}>
-              <span>{product.title} x{product.inCartNum}</span>
-              <span>¥{product.price * product.inCartNum}</span>
-            </div>
-          ))}
-          <div className={styles.summaryItem}>
-            <span>商品合計</span>
-            <span>¥{inCartProducts.reduce((total, product) => total + (product.price * product.inCartNum), 0)}</span>
+          <div className={styles.productSummary}>
+            {inCartProducts.map((product, index) => (
+              <div key={index} className={styles.summaryItem}>
+                <span>{product.title} x{product.inCartNum}</span>
+                <span>¥{product.price * product.inCartNum}</span>
+              </div>
+            ))}
           </div>
-          <div className={styles.summaryItem}><span>送料</span><span>¥600</span></div>
-          <div className={styles.summaryItem}><span>手数料</span><span>¥300</span></div>
           <div className={styles.summaryItem}>
+              <span>商品合計</span>
+              <span>¥{inCartProducts.reduce((total, product) => total + (product.price * product.inCartNum), 0)}</span>
+            </div>
+          <div className={styles.otherSummary}>
+            <div className={styles.summaryItem}><span>送料</span><span>¥600</span></div>
+            <div className={styles.summaryItem}><span>手数料</span><span>¥300</span></div>
+          </div>
+          <div className={styles.totalSummary}>
             <span>合計</span>
-            <span className={styles.total}>
+            <span>
               ¥{inCartProducts.reduce((total, product) => total + (product.price * product.inCartNum), 0) + 600 + 300}
             </span>
           </div>

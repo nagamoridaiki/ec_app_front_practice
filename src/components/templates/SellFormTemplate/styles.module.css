@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  justify-content: flex-start; /* 修正: space-between から flex-start に変更 */
+  justify-content: flex-start;
   width: 100%;
   max-width: 1200px;
   background: #fff;
@@ -9,8 +9,8 @@
 }
 
 .form {
-  flex: 1 1 65%; /* 修正: 幅を65%に設定 */
-  margin-right: 1.666%; /* 修正: 左のマージンを右のマージンに変更 */
+  flex: 1 1 65%;
+  margin-right: 1.666%;
 }
 
 .label {
@@ -27,7 +27,7 @@
 }
 
 .shortInput {
-  width: 30%; /* Adjust the width as needed */
+  width: 30%;
   padding: 1% 1%;
   border: 2px solid #ccc;
   border-radius: 4px;
@@ -40,25 +40,20 @@
 
 .creditCardInfo {
   margin-left: 3%;
-  background-color: #e0f7e0; /* 薄い緑色に設定 */
-}
-
-.creditCardInfo {
-  margin-left: 3%;
-  background-color: #e0f7e0; /* 薄い緑色に設定 */
-  border: 1px solid #ccc; /* 枠の線を短く */
-  padding: 1% 4% 1% 1% ; /* 背景色の長さに合わせて */
-  width: calc(100% - 10%); /* 枠の右側の長さをもう少し短く */
-  border: none; /* 外枠の線を消す */
+  background-color: #e0f7e0;
+  border: 1px solid #ccc;
+  padding: 1% 4% 1% 1%;
+  width: calc(100% - 10%);
+  border: none;
 }
 
 .takkyubinInfo {
   margin-left: 3%;
-  background-color: #ffe0b2; /* 薄いオレンジに設定 */
-  border: 1px solid #ccc; /* 枠の線を短く */
-  padding: 1% 4% 1% 1% ; /* 背景色の長さに合わせて */
-  width: calc(100% - 10%); /* 枠の右側の長さをもう少し短く */
-  border: none; /* 外枠の線を消す */
+  background-color: #ffe0b2;
+  border: 1px solid #ccc;
+  padding: 1% 4% 1% 1%;
+  width: calc(100% - 10%);
+  border: none;
 }
 
 .submitGroup {
@@ -81,7 +76,7 @@
 }
 
 .summary {
-  flex: 1 1 30%; /* 修正: 幅を30%に設定 */
+  flex: 1 1 30%;
   padding: 1.666%;
   background: #f8f8f8;
   border-left: 0.0833% solid #ccc;
@@ -98,4 +93,21 @@
   font-size: 18px;
   color: #d04;
   font-weight: bold;
+}
+
+.productSummary {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.otherSummary {
+  margin-top: 10px;
+}
+
+.totalSummary {
+  font-size: 18px;
+  color: #d04;
+  font-weight: bold;
+  margin-top: 10px;
 }

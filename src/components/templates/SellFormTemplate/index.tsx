@@ -163,7 +163,13 @@ export const SellFormTemplate = () => {
                 products_num: inCartProducts.length,
                 specified_delivery_date: selectDeliveryDates ? { seconds: (getDeliveryDateInMillis(selectDeliveryDates) / 1000).toString(), nanos: 0 } : undefined,
                 specified_delivery_time: deliveryTime,
-                modification_type: 'AUTO'
+                modification_type: 'AUTO',
+                selling_order_inventories: inCartProducts.map(product => ({
+                    inventory_id: product.inventoryId,
+                    rank: product.rank,
+                    price: product.price,
+                    num: product.inCartNum
+                }))
               };
               console.log("orderDetailsの中身", orderDetails);
               createSellingOrder(orderDetails);

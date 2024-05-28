@@ -20,6 +20,12 @@ export interface CreateSellingOrderParams {
   } | undefined;
   specified_delivery_time?: string;
   modification_type: string;
+  selling_order_inventories: {
+    inventory_id: number;
+    rank: string;
+    price: number;
+    num: number;
+  }[]
 }
 
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './styles.module.css';
 import { useAuthContext } from '@/contexts/AuthContext';
-import { Header } from '../../organisms/Header';
+import { Header } from '@/components/organisms/Header';
 import { useCart } from '@/hooks/useCart';
 import { useProductContext } from '@/contexts/productContext';
 import { useSellFormTemplate } from './useSellFormTemplate';
@@ -20,9 +20,33 @@ export const SellFormTemplate = () => {
   const { inCartProducts } = useCart(user?.user_id, productList);
 
   const [
-    { paymentMethod, shippingOption, deliveryDates, deliveryTime, selectDeliveryDates },
-    { handlePaymentChange, handleShippingChange, setDeliveryDate, setDeliveryTime, setSelectDeliveryDates }
-  ] = useSellFormTemplate({ productList });
+    {
+      paymentMethod,
+      shippingOption,
+      deliveryDateOptions,
+      deliveryTime,
+      selectDeliveryDates,
+      delivery_zip_code,
+      delivery_prefecture,
+      delivery_address1,
+      delivery_address2,
+      phoneNumber
+    },
+    {
+      handlePaymentChange,
+      handleShippingChange,
+      setDeliveryTime,
+      setSelectDeliveryDates,
+      createSellingOrder,
+      setDeliveryZipCode,
+      setDeliveryPrefecture,
+      setDeliveryAddress1,
+      setDeliveryAddress2,
+      setPhoneNumber,
+      getDeliveryDateInMillis
+    }
+  ] = useSellFormTemplate({ inCartProducts });
+
 
   return (
     <div className={styles.app} onClick={() => handleDocumentClick(menuVisible, setMenuVisible)}>
@@ -35,13 +59,13 @@ export const SellFormTemplate = () => {
             <input id="name" type="text" className={styles.input} />
           </div>
           <div className={styles.inputGroup}>
-            <label htmlFor="zip" className={styles.label}>郵便番号</label>
-            <input id="zip" type="text" className={`${styles.input} ${styles.shortInput}`} />
+            <label htmlFor="delivery_zip_code" className={styles.label}>郵便番号</label>
+            <input id="delivery_zip_code" type="text" className={`${styles.input} ${styles.shortInput}`} onChange={(e) => setDeliveryZipCode(e.target.value)} />
           </div>
 
           <div className={styles.inputGroup}>
-            <label htmlFor="prefecture" className={styles.label}>住所</label>
-            <select id="prefecture" className={`${styles.select}  ${styles.shortInput}`}>
+            <label htmlFor="delivery_prefecture" className={styles.label}>住所</label>
+            <select id="delivery_prefecture" className={`${styles.select}  ${styles.shortInput}`} onChange={(e) => setDeliveryPrefecture(e.target.value)}>
               <option value="">選択してください</option>
               {prefectures.map((prefecture, index) => (
                 <option key={index} value={prefecture}>{prefecture}</option>
@@ -50,11 +74,11 @@ export const SellFormTemplate = () => {
           </div>
           <div className={styles.inputGroup}>
             <span className={`${styles.description} ${styles.lightGray}`}>市区町村、番地等（例：四日市市川島町6200-9）</span>
-            <input id="city" type="text" className={styles.input} />
+            <input id="city" type="text" className={styles.input} onChange={(e) => setDeliveryAddress1(e.target.value)} />
           </div>
           <div className={styles.inputGroup}>
             <span className={styles.description}>アパート・マンション・ビル名、部屋番号等</span>
-            <input id="street" type="text" className={styles.input} />
+            <input id="delivery_address2" type="text" className={styles.input} onChange={(e) => setDeliveryAddress2(e.target.value)} />
           </div>
 
           <div className={styles.inputGroup}>
@@ -63,7 +87,7 @@ export const SellFormTemplate = () => {
           </div>
           <div className={styles.inputGroup}>
             <label htmlFor="phone" className={styles.label}>電話番号</label>
-            <input id="phone" type="tel" className={`${styles.input} ${styles.shortInput}`} />
+            <input id="phone" type="tel" className={`${styles.input} ${styles.shortInput}`} onChange={(e) => setPhoneNumber(e.target.value)} />
           </div>
           <div className={styles.inputGroup}>
             <label htmlFor="paymentMethod" className={styles.label}>お支払い方法</label>
@@ -93,19 +117,19 @@ export const SellFormTemplate = () => {
           <div className={styles.inputGroup}>
             <label htmlFor="shippingOption" className={styles.label}>配送オプション</label>
             <select id="shippingOption" className={styles.select} onChange={handleShippingChange}>
-              <option value="nekobos">ネコボス</option>
-              <option value="takkyubin">宅急便</option>
+              <option value="YAMATO_SMART_CAT">ネコボス</option>
+              <option value="YAMATO_HOME_DELIVERY">宅急便</option>
             </select>
           </div>
-          {shippingOption == 'takkyubin' && (
+          {shippingOption == 'YAMATO_HOME_DELIVERY' && (
             <div className={styles.takkyubinInfo}>
               <div className={styles.inputGroup}>
                 <label htmlFor="deliveryDate" className={styles.label}>配達日</label>
-                <select id="deliveryDate" className={styles.select} onChange={(e) => {
-                  setDeliveryDate(e.target.value);
-                  setSelectDeliveryDates(e.target.value);
+                <select id="deliveryDate" className={styles.select}
+                onChange={(e) => {
+                  setSelectDeliveryDates(e.target.selectedIndex);
                 }}>
-                  {deliveryDates.map((date, index) => (
+                  {deliveryDateOptions.map((date, index) => (
                     <option key={index} value={date}>{date}</option>
                   ))}
                 </select>
@@ -113,17 +137,43 @@ export const SellFormTemplate = () => {
               <div className={styles.inputGroup}>
                 <label htmlFor="deliveryTime" className={styles.label}>時間帯</label>
                 <select id="deliveryTime" className={styles.select} onChange={(e) => setDeliveryTime(e.target.value)}>
-                  <option value="morning">午前中</option>
-                  <option value="14-16">14時〜16時</option>
-                  <option value="16-18">16時〜18時</option>
-                  <option value="18-20">18時〜20時</option>
-                  <option value="19-21">19時〜21時</option>
+                  <option value="TIME_0800_1200">午前中</option>
+                  <option value="TIME_1400_1600">14時〜16時</option>
+                  <option value="TIME_1600_1800">16時〜18時</option>
+                  <option value="TIME_1800_2000">18時〜20時</option>
+                  <option value="TIME_1900_2100">19時〜21時</option>
                 </select>
               </div>
             </div>
           )}
           <div className={styles.submitGroup}>
-            <button type="submit" className={styles.submitButton}>送信する</button>
+          <button type="button" className={styles.submitButton} onClick={() => {
+              const orderDetails = {
+                user_id: user!.user_id,
+                order_status: 'SHIPPING',
+                delivery_name: user!.name,
+                delivery_phone_number: phoneNumber,
+                delivery_zip_code: delivery_zip_code,
+                delivery_prefecture: delivery_prefecture,
+                delivery_address1: delivery_address1,
+                delivery_address2: delivery_address2,
+                delivery_method: shippingOption,
+                payment_method: paymentMethod,
+                amount: inCartProducts.reduce((total, product) => total + (product.price * product.inCartNum), 0) + 600 + 300,
+                products_num: inCartProducts.length,
+                specified_delivery_date: selectDeliveryDates ? { seconds: (getDeliveryDateInMillis(selectDeliveryDates) / 1000).toString(), nanos: 0 } : undefined,
+                specified_delivery_time: deliveryTime,
+                modification_type: 'AUTO',
+                selling_order_inventories: inCartProducts.map(product => ({
+                    inventory_id: product.inventoryId,
+                    rank: product.rank,
+                    price: product.price,
+                    num: product.inCartNum
+                }))
+              };
+              console.log("orderDetailsの中身", orderDetails);
+              createSellingOrder(orderDetails);
+            }}>送信する</button>
           </div>
         </form>
         <div className={styles.summary}>

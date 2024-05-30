@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import globalAxios, { ResponseType, isAxiosError } from './config';
-import { ProductType, RegisterProductParams, CategoryType } from '../interfaces/product';
+import { ProductType, RegisterProductParams, CategoryType, listProductParams } from '../interfaces/product';
 
 export const registerProductApi = async (params: RegisterProductParams) => {
   try {
@@ -52,7 +52,14 @@ export const fetchCategoriesListApi = async () => {
 
 export const fetchProductListApi = async () => {
   try {
-    const { data } = await globalAxios.get('/products');
+    const { data } = await globalAxios.get('/products', {
+      params: {
+        product_ids: [],
+        titles: '',
+        limit: 100,
+        offset: 0
+      }
+    });
     //console.log("APIレスポンス結果", data)
 
     const res: ResponseType<Array<ProductType>> = {

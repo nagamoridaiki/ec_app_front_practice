@@ -15,6 +15,17 @@ export interface ProductType {
   inventories?: InventoryType[]
 }
 
+export interface listProductParams {
+  product_ids: number[],
+  titles: string | undefined,
+  limit?: number | undefined,
+  offset?: number | undefined,
+  order_by?: {
+    field: string,
+    direction: 'asc' | 'desc'
+  }
+}
+
 export interface CategoryType {
   categoryId: number;
   categoryName: string;

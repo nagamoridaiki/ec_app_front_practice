@@ -24,12 +24,11 @@ export const useProduct = () => {
     setProduct(res?.data);
   }, []);
 
-  // product一覧を呼び出すAPIメソッド
+  // categoty一覧を呼び出すAPIメソッド
   const fetchCategoriesList = useCallback(async (): Promise<void> => {
     const res = await fetchCategoriesListApi();
     setCategoriesList(res?.data && typeof res.data === 'object' ? res.data : []);
   }, []);
-
 
   useEffect(() => {
     fetchProductList();
@@ -42,5 +41,4 @@ export const useProduct = () => {
     registerProduct,
     product
   }
-
 }

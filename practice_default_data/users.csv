@@ -1,0 +1,2 @@
+"user_id","name","email","desplayname","profileImageUrl","password","zip_code","prefecture","address1","address2","address3","image_url","identity_verification","created_at","updated_at"
+1,"daiki","taro@yamada.jp",NULL,NULL,"$2b$10$If38ojI0JNF35RfRPESvh.uos/DINAz/1GwkroRySJ9J6.8Bmue4O",NULL,NULL,NULL,NULL,NULL,NULL,0,"2024-05-03 09:50:25","2024-05-03 09:50:25"

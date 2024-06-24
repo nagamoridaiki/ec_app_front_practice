@@ -27,10 +27,12 @@ export const TotalAmount: FC<Props> = ({ inCartProducts }) => {
           {inCartProducts.reduce((total, item) => total + (item.price * item.inCartNum), 0)}円
         </span>
       </div>
-      <CommonButton
-        buttonText="購入に進む"
-        buttonStyle="orderCheckout"
-      />
+      <div onClick={() => window.location.assign('/ec/sell_form')}>
+        <CommonButton
+          buttonText="購入に進む"
+          buttonStyle="orderCheckout"
+        />
+      </div>
     </div>
   );
 }

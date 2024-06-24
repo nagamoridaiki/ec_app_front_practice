@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { fetchTodoDetailApi } from '../../../apis/productApi'
+import { fetchProductDetailApi } from '../../../apis/productApi'
 import { ProductType } from '../../../interfaces/product';
 
 type StatesType = { product: ProductType | undefined };
@@ -12,7 +12,7 @@ export const useProductDetailTemplate = (user_id: number| undefined) => {
   const fetchProductDetail = useCallback(async () => {
     const targetId = router?.query?.id;
     if (!!targetId && typeof targetId === 'string' && !Number.isNaN(Number(targetId))) {
-      const res = await fetchTodoDetailApi(Number(targetId))
+      const res = await fetchProductDetailApi(Number(targetId))
       setProduct(res?.data && typeof res.data === 'object' ? toProductMessage(res.data) : undefined)
     }
   }, [router?.query?.id])

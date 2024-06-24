@@ -23,6 +23,7 @@ export const useAuth = () => {
   }, []);
 
   const signOut = useCallback(async () => {
+    sessionStorage.removeItem('user');
     setUser(undefined);
     setIsAuth(false);
   }, [])

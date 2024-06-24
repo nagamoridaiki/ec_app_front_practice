@@ -28,6 +28,7 @@ export const Products: FC<Props> = ({ initialProductList }) => {
       await addToCart(existingCartItems, selected, user.user_id);
       setShowAddToCartMessage(true);
       setTimeout(() => setShowAddToCartMessage(false), 2500);
+      window.location.reload();
     }
   };
 

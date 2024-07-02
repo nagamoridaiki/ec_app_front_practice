@@ -47,6 +47,14 @@
   padding: 1%;
 }
 
-/*
-ここまでサイドバー
-*/
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .filter-section {
+    flex: 1;
+    min-width: 200px; /* 必要に応じて調整 */
+  }
+}

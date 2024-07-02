@@ -1,15 +1,14 @@
 /* 商品コンポーネントのスタイル */
 .products {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;  /* 各行のアイテムを上揃えに */
   justify-content: flex-start;  /* 左から右にアイテムを並べる */
-  padding: 2%;
   max-width: 100%; /* コンテナの最大幅設定 */
 }
 
 .product {
-  flex: 0 0 30%; /* 30%の幅を保持し、内容によって伸縮しない */
-  margin: 1%;
+  flex: 0 0 calc(15% - 2%);
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
@@ -22,7 +21,7 @@
 
 .product img {
   width: 100%;
-  height: 150px;
+  height: 100px;
   object-fit: cover;
   margin-bottom: 10px;
   border-radius: 10px; /* 画像の角も丸く */
@@ -51,4 +50,15 @@
   border-radius: 5px;
   z-index: 1000;
   animation: fadeInOut 3s ease-in-out;
+}
+
+/* SPの場合の設定 */
+@media (max-width: 768px) {
+  .product {
+    flex: 0 0 calc(33% - 4%);
+  }
+
+  .section {
+    margin: 0;
+  }
 }

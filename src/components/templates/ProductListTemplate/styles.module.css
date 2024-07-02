@@ -96,6 +96,14 @@
     display: block;
 }
 
-/*
-ここまで商品一覧（メインコンテンツ）
-*/
+
+@media (max-width: 768px) {
+  .content {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .products {
+    order: 2;
+  }
+}

@@ -1,0 +1,20 @@
+
+.signinForm {
+  padding: 2.5%;
+  border: 0.1% solid #ccc;
+  border-radius: 0.5%;
+  width: 100%;
+  max-width: 25%;
+  background-color: #fff;
+  box-shadow: 0 0.25% 0.5% rgba(0, 0, 0, 0.1);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2.5%;
+}
+
+.formGroup label {
+  margin-bottom: 1.25%;
+}

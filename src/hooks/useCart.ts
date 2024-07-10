@@ -82,7 +82,8 @@ export const useCart = (user_id: number | undefined, productList: Array<ProductT
       if (foundProduct) {
         return {
           ...foundProduct,
-          inCartNum: cartItem.addToCartCount
+          inCartNum: cartItem.addToCartCount,
+          cartInventoryId: cartItem.cartInventoryId
         } as MergedProductType;
       } else {
         return null;

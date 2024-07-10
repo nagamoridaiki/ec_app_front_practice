@@ -43,5 +43,6 @@ export type ProductInventoryType = ProductType & InventoryType;
 
 export type MergedProductType = ProductType & InventoryType & {
   inCartNum: number;
+  cartInventoryId: number;
 };
 

@@ -50,6 +50,40 @@ export const fetchCartListApi = async (user_id: number) => {
   }
 }
 
+export const deleteCartItemApi = async (cart_inventory_id: number) => {
+  try {
+     await globalAxios.delete(`/cart/${cart_inventory_id}`);
+  } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: ''
+    };
+    if (isAxiosError(err)) {
+      const axiosError = err as IErrorResponse;
+      res.code = axiosError.response.status;
+      res.message = axiosError.response.data.message;
+    }
+    return res;
+  }
+}
+
+export const updateCartInventoryNumApi = async (cart_inventory_id: number, num: number) => {
+  try {
+     await globalAxios.patch(`/cart/update_num/`, { cart_inventory_id, num});
+  } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: ''
+    };
+    if (isAxiosError(err)) {
+      const axiosError = err as IErrorResponse;
+      res.code = axiosError.response.status;
+      res.message = axiosError.response.data.message;
+    }
+    return res;
+  }
+}
+
 
 export interface IErrorResponse {
   code: string;

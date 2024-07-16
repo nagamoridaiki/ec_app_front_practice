@@ -9,10 +9,12 @@ export const LoginTemplate = () => {
 
   return (
     <div className={styles.App}>
-    <Header user={user} />
       <div className={styles.signinContainer}>
         <h2>Login</h2>
         <Loginform />
+        <div className={styles.signupLink}>
+          <div onClick={() => window.location.href='/signup'} className={styles.signupButton}>新規会員登録</div>
+        </div>
       </div>
     </div>
   )

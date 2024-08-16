@@ -105,7 +105,11 @@ export const useSellFormTemplate = () => {
 
   const createSellingOrder = useCallback(async (params: CreateSellingOrderParams) => {
     const res = await createSellingOrderApi(params);
-    if (res?.data && typeof res.data === 'object') return;
+    if (res?.code === 201 && res?.data && typeof res.data === 'object') {
+      return;
+    } else if (res?.code === 500) {
+      console.error('Internal Server Error: 500');
+    }
   }, []);
 
 

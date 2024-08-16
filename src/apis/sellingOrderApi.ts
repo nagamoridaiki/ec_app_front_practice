@@ -9,7 +9,7 @@ export const createSellingOrderApi = async (params: CreateSellingOrderParams) =>
     const { data } = await globalAxios.post('/sellingOrder', params);
 
     const res: ResponseType<SellingOrderResponse> = {
-      code: 200,
+      code: 201,
       data
     };
     return res
